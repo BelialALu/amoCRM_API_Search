@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function EntityCard({ entity }) {
     return (
         <div className="entity-card">
@@ -5,9 +7,9 @@ function EntityCard({ entity }) {
 
             <p>{entity.description}</p>
 
-            <button>
+            <Link to={`/entity/${entity.id}`}>
                 Посмотреть методы
-            </button>
+            </Link>
         </div>
     );
 }
