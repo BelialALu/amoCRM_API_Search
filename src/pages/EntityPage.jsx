@@ -1,14 +1,42 @@
 import { useParams } from "react-router-dom";
+import { entities } from "../data/entities";
+import { methods } from "../data/methods";
 
 function EntityPage() {
     const { entityId } = useParams();
 
-    return (
-        <>
-            <h1>{entityId}</h1>
+    const entity = entities.find(
+        (item) => item.id === entityId
+    );
 
-            <p>Страница сущности</p>
-        </>
+    if (!entity) {
+        return <h1>Сущность не найдена</h1>;
+    }
+
+    const entityMethods = methods[entityId] || [];
+
+    return (
+        <div>
+            <h1>{entity.title}</h1>
+
+            <p>{entity.description}</p>
+
+            <h2>Методы</h2>
+
+            {entityMethods.length === 0 ? (
+                <p>Методы пока не добавлены.</p>
+            ) : (
+                entityMethods.map((method) => (
+                    <div key={method.id}>
+                        <h3>{method.title}</h3>
+
+                        <p>{method.endpoint}</p>
+
+                        <p>{method.description}</p>
+                    </div>
+                ))
+            )}
+        </div>
     );
 }
 
