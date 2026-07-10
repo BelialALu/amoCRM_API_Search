@@ -5,33 +5,27 @@ import { methods } from "../data/methods";
 function EntityPage() {
     const { entityId } = useParams();
 
-    const entity = entities.find(
-        (item) => item.id === entityId
-    );
+    const entity = entities.find(item => item.id === entityId);
+    const entityMethods = methods[entityId] || [];
 
     if (!entity) {
         return <h1>Сущность не найдена</h1>;
     }
 
-    const entityMethods = methods[entityId] || [];
-
     return (
         <div>
             <h1>{entity.title}</h1>
-
             <p>{entity.description}</p>
 
-            <h2>Методы</h2>
+            <h2>Методы API</h2>
 
             {entityMethods.length === 0 ? (
-                <p>Методы пока не добавлены.</p>
+                <p>Методы отсутствуют</p>
             ) : (
-                entityMethods.map((method) => (
+                entityMethods.map(method => (
                     <div key={method.id}>
                         <h3>{method.title}</h3>
-
-                        <p>{method.endpoint}</p>
-
+                        <p>{method.method} {method.endpoint}</p>
                         <p>{method.description}</p>
                     </div>
                 ))

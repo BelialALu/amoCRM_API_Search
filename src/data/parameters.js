@@ -1,12 +1,18 @@
 export const commonParams = {
+
     page: {
         name: "page",
         type: "integer",
-        description: "Номер страницы выборки."
+        description:
+            "Номер страницы."
     },
+
+
     limit: {
         name: "limit",
         type: "integer",
-        description: "Количество элементов на странице."
+        description:
+            "Количество элементов на странице."
     }
+
 };
