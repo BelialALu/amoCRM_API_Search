@@ -2,42 +2,32 @@ import { useParams } from "react-router-dom";
 
 import { methods } from "../data/methods";
 
+import MethodInfo from "../components/MethodInfo";
+
 function MethodPage() {
 
     const { methodId } = useParams();
 
-    const method = methods.find(
-        item => item.id === methodId
-    );
+    const allMethods = Object.values(methods).flat();
+
+    const methodsMap = allMethods.reduce((map, currentMethod) => {
+        map[currentMethod.id] = currentMethod;
+        return map;
+    }, {});
+
+    const method = methodsMap[methodId];
 
     if (!method) {
         return <h1>Метод не найден</h1>;
     }
 
     return (
-
-        <div>
-
-            <h1>{method.title}</h1>
-
-            <h2>
-
-                {method.method}
-
-                {" "}
-
-                {method.endpoint}
-
-            </h2>
-
-            <p>
-
-                {method.description}
-
-            </p>
-
-        </div>
-
+        <MethodInfo
+            method={method}
+            methodsMap={methodsMap}
+            showRelatedMethods={true}
+            splitMainParams={true}
+        />
     );
 
 }

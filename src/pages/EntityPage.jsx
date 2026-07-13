@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { entities } from "../data/entities";
 import { methods } from "../data/methods";
 
-import MethodCard from "../components/MethodCard";
+import MethodInfo from "../components/MethodInfo";
 
 function EntityPage() {
 
@@ -13,14 +13,19 @@ function EntityPage() {
         item => item.id === entityId
     );
 
-    const entityMethods = methods.filter(
-        method => method.entity === entityId
-    );
-
     if (!entity) {
         return <h1>Сущность не найдена</h1>;
     }
 
+    const entityMethods = methods[entityId] || [];
+
+    const allMethods = Object.values(methods).flat();
+
+    const methodsMap = allMethods.reduce((map, currentMethod) => {
+        map[currentMethod.id] = currentMethod;
+        return map;
+    }, {});
+    
     return (
         <div>
 
@@ -30,17 +35,22 @@ function EntityPage() {
 
             <h2>Методы API</h2>
 
-            {entityMethods.map(method => (
-
-                <MethodCard
-                    key={method.id}
-                    method={method}
-                />
-
-            ))}
+            {entityMethods.length > 0 ? (
+                entityMethods.map(method => (
+                    <MethodInfo
+                        key={method.id}
+                        method={method}
+                        methodsMap={methodsMap}
+                        splitMainParams={false}
+                    />
+                ))
+    ) : (
+        <p>Для данного раздела методы пока отсутствуют.</p>
+)}
 
         </div>
     );
+
 }
 
 export default EntityPage;
