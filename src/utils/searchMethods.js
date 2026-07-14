@@ -4,6 +4,7 @@ import { parameters } from "../data/parameters";
 export function searchMethods(
     query = "",
     requestMethod = "",
+    selectedEntity = "",
     searchInRequestParams = false,
     searchInResponseParams = false,
     searchInAllParams = false
@@ -11,7 +12,7 @@ export function searchMethods(
 
     const searchText = query.trim().toLowerCase();
 
-    if (!searchText) {
+    if (!searchText && !selectedEntity && !requestMethod) {
         return [];
     }
 
@@ -25,6 +26,14 @@ export function searchMethods(
             if (
                 requestMethod &&
                 method.method.toLowerCase() !== requestMethod.toLowerCase()
+            ) {
+                return;
+            }
+
+            // Фильтр по разделу
+            if (
+                selectedEntity &&
+                entityId !== selectedEntity
             ) {
                 return;
             }
@@ -77,7 +86,10 @@ export function searchMethods(
                 .join(" ")
                 .toLowerCase();
 
-            if (searchableText.includes(searchText)) {
+            if (
+                !searchText ||
+                searchableText.includes(searchText)
+            ) {
 
                 results.push({
                     entityId,

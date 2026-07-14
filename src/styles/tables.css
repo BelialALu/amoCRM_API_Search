@@ -1,0 +1,336 @@
+/* ==========================================================
+   TABLE
+========================================================== */
+
+table{
+    width:100%;
+
+    margin-top:var(--spacing-md);
+
+    border-collapse:collapse;
+
+    overflow:hidden;
+
+    background:var(--glass-background);
+
+    backdrop-filter:blur(var(--glass-blur));
+
+    border:1px solid var(--glass-border);
+
+    border-radius:var(--radius-small);
+
+    box-shadow:var(--shadow-small);
+}
+
+/* ==========================================================
+   HEAD
+========================================================== */
+
+thead{
+    background:rgba(91,124,255,.08);
+}
+
+th{
+    padding:var(--table-cell-padding);
+
+    text-align:left;
+
+    font-weight:600;
+
+    color:var(--color-primary);
+
+    border-bottom:1px solid var(--color-border);
+
+    white-space:nowrap;
+}
+
+/* ==========================================================
+   BODY
+========================================================== */
+
+tbody tr{
+    transition:
+        background var(--transition);
+}
+
+tbody tr:hover{
+    background:rgba(91,124,255,.05);
+}
+
+tbody tr:not(:last-child){
+    border-bottom:1px solid var(--color-border);
+}
+
+td{
+    padding:var(--table-cell-padding);
+
+    vertical-align:top;
+
+    color:var(--color-text-secondary);
+
+    line-height:1.6;
+}
+
+/* ==========================================================
+   COLUMN WIDTH HELPERS
+========================================================== */
+
+.table-fit{
+    width:1%;
+
+    white-space:nowrap;
+}
+
+.table-center{
+    text-align:center;
+}
+
+.table-right{
+    text-align:right;
+}
+
+/* ==========================================================
+   STRIPED TABLE
+========================================================== */
+
+.table-striped tbody tr:nth-child(even){
+    background:rgba(255,255,255,.02);
+}
+
+.table-striped tbody tr:nth-child(even):hover{
+    background:rgba(91,124,255,.06);
+}
+
+/* ==========================================================
+   COMPACT TABLE
+========================================================== */
+
+.table-compact th,
+.table-compact td{
+    padding:var(--table-cell-padding-small);
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+.table-wrapper{
+    overflow-x:auto;
+
+    border-radius:var(--radius-small);
+}
+
+/* ==========================================================
+   CODE
+========================================================== */
+
+code{
+    display:inline-block;
+
+    padding:4px 8px;
+
+    border-radius:var(--radius-small);
+
+    background:rgba(91,124,255,.08);
+
+    color:var(--color-primary);
+
+}
+
+/* ==========================================================
+   PRE
+========================================================== */
+
+pre{
+    overflow:auto;
+
+    margin-top:var(--spacing-md);
+
+    padding:var(--spacing-lg);
+
+    border-radius:var(--radius-medium);
+
+    background:#0b1120;
+
+    border:1px solid var(--color-border);
+
+    box-shadow:var(--shadow-small);
+}
+
+pre code{
+    display:block;
+
+    padding:0;
+
+    background:none;
+
+    color:#d7e3ff;
+
+    font-size:.95rem;
+
+    line-height:1.7;
+}
+
+/* ==========================================================
+   DETAILS
+========================================================== */
+
+details{
+    margin-top:var(--spacing-md);
+
+    overflow:hidden;
+
+    background:var(--glass-background);
+
+    backdrop-filter:blur(var(--glass-blur));
+
+    border:1px solid var(--glass-border);
+
+    border-radius:var(--radius-medium);
+
+    box-shadow:var(--shadow-small);
+
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+details:hover{
+    border-color:rgba(91,124,255,.25);
+}
+
+details[open]{
+    box-shadow:var(--shadow-medium);
+}
+
+/* ==========================================================
+   SUMMARY
+========================================================== */
+
+summary{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:var(--spacing-md);
+
+    padding:var(--spacing-md);
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    color:var(--color-text);
+
+    transition:
+        background var(--transition);
+}
+
+summary:hover{
+    background:rgba(91,124,255,.05);
+}
+
+details[open] summary{
+    border-bottom:1px solid var(--color-border);
+}
+
+/* ==========================================================
+   DETAILS CONTENT
+========================================================== */
+
+details > *:not(summary){
+    padding:var(--spacing-lg);
+}
+
+/* ==========================================================
+   BADGES
+========================================================== */
+
+.badge{
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:var(--font-size-small);
+
+    font-weight:600;
+
+    white-space:nowrap;
+}
+
+.badge.primary{
+    background:rgba(91,124,255,.12);
+
+    color:var(--color-primary);
+}
+
+.badge.success{
+    background:rgba(34,197,94,.12);
+
+    color:var(--color-success);
+}
+
+.badge.warning{
+    background:rgba(245,158,11,.12);
+
+    color:var(--color-warning);
+}
+
+.badge.danger{
+    background:rgba(239,68,68,.12);
+
+    color:var(--color-danger);
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width:768px){
+
+    table{
+        font-size:.92rem;
+    }
+
+    th,
+    td{
+        padding:var(--table-cell-padding-small);
+    }
+
+    summary{
+        padding:var(--spacing-sm) var(--spacing-md);
+    }
+
+    details>*:not(summary){
+        padding:var(--spacing-md);
+    }
+
+    pre{
+        padding:var(--spacing-md);
+    }
+
+}
+
+table,
+th,
+td{
+
+    font-family:var(--font-heading);
+
+    font-size:var(--font-size-base);
+
+    font-weight:400;
+
+    letter-spacing:0;
+
+    line-height:1.6;
+
+}

@@ -1,0 +1,387 @@
+/* ==========================================================
+   PAGE CONTAINER
+========================================================== */
+
+.page-container{
+    width:100%;
+
+    max-width:var(--container-width);
+
+    margin:0 auto;
+
+    padding:
+        var(--spacing-xl)
+        var(--spacing-lg)
+        var(--page-padding-bottom);
+}
+
+/* ==========================================================
+   HOME PAGE
+========================================================== */
+
+.home-page{
+    display:flex;
+    flex-direction:column;
+    gap:var(--spacing-xxl);
+    padding-top:80px;
+}
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.hero{
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    gap:var(--spacing-lg);
+
+    padding:
+        var(--hero-padding-top)
+        0
+        var(--hero-padding-bottom);
+}
+
+.hero-title{
+    max-width:var(--hero-title-width);
+}
+
+.hero-description{
+    max-width:var(--hero-description-width);
+}
+
+.hero-actions{
+    display:flex;
+
+    gap:var(--spacing-md);
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+}
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
+.section{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--section-gap);
+}
+
+/* ==========================================================
+   SECTION HEADER
+========================================================== */
+
+.section-header{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:var(--spacing-md);
+
+    flex-wrap:wrap;
+}
+
+/* ==========================================================
+   ENTITIES GRID
+========================================================== */
+
+.entities-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:var(--spacing-lg);
+}
+
+/* ==========================================================
+   METHODS GRID
+========================================================== */
+
+.methods-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(var(--method-card-min-width),1fr)
+        );
+
+    gap:var(--grid-gap-small);
+}
+
+/* ==========================================================
+   TWO COLUMNS
+========================================================== */
+
+.two-columns{
+    display:grid;
+
+    grid-template-columns:
+        var(--sidebar-width)
+        1fr;
+
+    gap:var(--content-gap);
+
+    align-items:start;
+}
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+.sidebar{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--spacing-md);
+
+    position:sticky;
+
+    top:var(--spacing-md);
+}
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.content{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--content-gap);
+}
+
+/* ==========================================================
+   ENTITY PAGE
+========================================================== */
+
+.entity-page{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--page-section-gap);
+}
+
+/* ==========================================================
+   METHOD PAGE
+========================================================== */
+
+.method-page{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--page-section-gap-small);
+}
+
+/* ==========================================================
+   SEARCH PAGE
+========================================================== */
+
+.search-results{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--search-results-gap);
+}
+
+/* ==========================================================
+   SEARCH ENTITY
+========================================================== */
+
+.search-entity{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--spacing-lg);
+}
+
+/* ==========================================================
+   SEARCH METHOD
+========================================================== */
+
+.search-method{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--spacing-md);
+}
+
+/* ==========================================================
+   STACK
+========================================================== */
+
+.stack-xs{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--spacing-xs);
+}
+
+.stack-sm{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--spacing-sm);
+}
+
+.stack-md{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--spacing-md);
+}
+
+.stack-lg{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--spacing-lg);
+}
+
+/* ==========================================================
+   INLINE
+========================================================== */
+
+.inline{
+    display:flex;
+
+    align-items:center;
+
+    gap:var(--spacing-md);
+
+    flex-wrap:wrap;
+}
+
+/* ==========================================================
+   CENTER
+========================================================== */
+
+.center{
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+/* ==========================================================
+   SPACE BETWEEN
+========================================================== */
+
+.space-between{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:var(--spacing-md);
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:1100px){
+
+    .two-columns{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        position:relative;
+        top:0;
+    }
+
+}
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(max-width:1200px){
+
+    .entities-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:900px){
+
+    .entities-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:640px){
+
+    .entities-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:640px){
+
+    .page-container{
+        padding:
+            var(--page-padding-mobile-top)
+            var(--page-padding-mobile-side)
+            var(--page-padding-mobile-bottom);
+    }
+
+    .hero{
+        gap:var(--spacing-md);
+
+        padding:
+            var(--hero-padding-mobile-top)
+            0
+            var(--hero-padding-mobile-bottom);
+    }
+
+    .hero-actions{
+        width:100%;
+
+        flex-direction:column;
+    }
+
+    .hero-actions>*{
+        width:100%;
+    }
+
+    .section-header{
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+}

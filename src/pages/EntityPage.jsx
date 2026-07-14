@@ -4,6 +4,8 @@ import { entities } from "../data/entities";
 import { methods } from "../data/methods";
 
 import MethodInfo from "../components/MethodInfo";
+import { Link } from "react-router-dom";
+import { HiArrowLeft } from "react-icons/hi2";
 
 function EntityPage() {
 
@@ -27,13 +29,20 @@ function EntityPage() {
     }, {});
     
     return (
-        <div>
+        <>
+        <Link
+            to="/"
+            className="back-button"
+            title="Вернуться на главную"
+        >
+            <HiArrowLeft />
+        </Link>
+
+        <div className="entity-page">
 
             <h1>{entity.title}</h1>
 
-            <p>{entity.description}</p>
-
-            <h2>Методы API</h2>
+            <h2>{entity.description}</h2>
 
             {entityMethods.length > 0 ? (
                 entityMethods.map(method => (
@@ -49,6 +58,7 @@ function EntityPage() {
 )}
 
         </div>
+        </>
     );
 
 }

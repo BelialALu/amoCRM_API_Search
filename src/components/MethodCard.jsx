@@ -4,26 +4,21 @@ function MethodCard({ method }) {
 
     return (
 
-        <div className="method-card">
+        <div className="related-method">
 
             <h3>{method.title}</h3>
 
-            <p>
-
-                <strong>{method.method}</strong>
-
-                {" "}
-
-                {method.endpoint}
-
-            </p>
+            <code>
+                {method.method} {method.endpoint}
+            </code>
 
             <p>{method.description}</p>
 
-            <Link to={`/method/${method.id}`}>
-
+            <Link
+                to={`/method/${method.id}`}
+                className="method-link-button"
+            >
                 Подробнее
-
             </Link>
 
         </div>

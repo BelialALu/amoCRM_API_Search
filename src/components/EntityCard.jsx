@@ -3,15 +3,18 @@ import { HiOutlineArrowTopRightOnSquare } from "react-icons/hi2";
 
 import { methods } from "../data/methods";
 
-function EntityCard({ entity, matchedMethods = [] }) {
+    function EntityCard({
+        entity,
+        matchedMethods = [],
+        isSearching = false
+    }) {
 
     const entityMethods = methods[entity.id] || [];
 
-    const isSearching = matchedMethods.length > 0;
-
-    const methodsToShow = isSearching
-        ? matchedMethods
-        : entityMethods;
+    const methodsToShow =
+        matchedMethods.length > 0
+            ? matchedMethods
+            : entityMethods;
 
     return (
         <div className="entity-card">
@@ -33,7 +36,7 @@ function EntityCard({ entity, matchedMethods = [] }) {
                             className="method-item"
                         >
 
-                            <div className="method-info">
+                            <div className="method-preview">
 
                                 <div className="method-title">
                                     {method.title}

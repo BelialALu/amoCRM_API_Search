@@ -1,0 +1,621 @@
+/* ==========================================================
+   METHOD PAGE
+========================================================== */
+
+.method-info{
+    display:flex;
+    flex-direction:column;
+    gap:var(--spacing-lg);
+    padding:var(--card-padding);
+
+    background:var(--glass-background);
+    backdrop-filter:blur(var(--glass-blur));
+
+    border:1px solid var(--glass-border);
+    border-radius:var(--radius-large);
+
+    box-shadow:var(--shadow-small);
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.method-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+
+    gap:var(--spacing-lg);
+    flex-wrap:wrap;
+}
+
+.method-title{
+    display:flex;
+    flex-direction:column;
+    gap:var(--spacing-sm);
+}
+
+.method-description{
+    color:var(--color-text-secondary);
+    max-width:850px;
+}
+
+/* ==========================================================
+   ENDPOINT
+========================================================== */
+
+.method-endpoint{
+    display:inline-flex;
+    align-items:center;
+    gap:var(--spacing-sm);
+
+    align-self:flex-start;
+
+    padding:var(--spacing-sm) var(--spacing-md);
+
+    border-radius:var(--radius-medium);
+
+    background:rgba(91,124,255,.08);
+
+    border:1px solid rgba(91,124,255,.20);
+
+    color:var(--color-primary);
+
+    word-break:break-word;
+}
+
+/* ==========================================================
+   HTTP METHOD
+========================================================== */
+
+.http-method{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    min-width:72px;
+
+    padding:6px 14px;
+
+    border-radius:var(--radius-small);
+
+    background:var(--gradient-primary);
+
+    color:#fff;
+
+    font-size:var(--font-size-small);
+
+    font-weight:700;
+
+    letter-spacing:.05em;
+
+    text-transform:uppercase;
+}
+
+/* ==========================================================
+   INFO BLOCK
+========================================================== */
+
+.method-block{
+    display:flex;
+    flex-direction:column;
+
+    gap:var(--spacing-md);
+}
+
+/* ==========================================================
+   CODE
+========================================================== */
+
+.method-info pre{
+    overflow:auto;
+
+    padding:var(--spacing-md);
+
+    border-radius:var(--radius-medium);
+
+    background:#0b1020;
+
+    border:1px solid var(--color-border);
+}
+
+
+
+/* ==========================================================
+   INLINE CODE
+========================================================== */
+
+.method-info p code,
+.method-info li code{
+    padding:3px 8px;
+
+    border-radius:var(--radius-small);
+
+    background:rgba(91,124,255,.10);
+
+    color:var(--color-primary);
+}
+
+/* ==========================================================
+   DETAILS
+========================================================== */
+
+.method-info details{
+    overflow:hidden;
+
+    border-radius:var(--radius-medium);
+
+    background:var(--color-surface);
+
+    border:1px solid var(--color-border);
+
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.method-info details:hover{
+    border-color:rgba(91,124,255,.25);
+}
+
+.method-info details[open]{
+    box-shadow:var(--shadow-small);
+}
+
+.method-info summary{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    padding:var(--spacing-md);
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:
+        background var(--transition);
+}
+
+.method-info summary:hover{
+    background:rgba(91,124,255,.05);
+}
+
+.method-info details>*:not(summary){
+    padding:var(--spacing-lg);
+}
+
+/* ==========================================================
+   ALERTS
+========================================================== */
+
+.method-alert{
+    padding:var(--spacing-md);
+
+    border-radius:var(--radius-medium);
+
+    border-left:4px solid var(--color-primary);
+
+    background:rgba(91,124,255,.08);
+}
+
+.method-alert.success{
+    border-left-color:var(--color-success);
+}
+
+.method-alert.warning{
+    border-left-color:var(--color-warning);
+}
+
+.method-alert.error{
+    border-left-color:var(--color-danger);
+}
+
+/* ==========================================================
+   RELATED METHODS
+========================================================== */
+
+.related-methods{
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,1fr));
+
+    gap:var(--spacing-md);
+}
+
+.related-method{
+    display:flex;
+    flex-direction:column;
+
+    gap:var(--spacing-md);
+
+    padding:var(--spacing-md);
+
+    border-radius:var(--radius-medium);
+
+    background:var(--color-surface);
+
+    border:1px solid var(--color-border);
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.related-method:hover{
+    transform:translateY(-4px);
+
+    border-color:rgba(91,124,255,.30);
+
+    box-shadow:var(--shadow-medium);
+}
+
+.related-method h4{
+    margin:0;
+}
+
+.related-method p{
+    margin:0;
+}
+
+.related-method code{
+    color:var(--color-primary);
+}
+
+/* ==========================================================
+   LINK BUTTON
+========================================================== */
+
+.method-link-button{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:var(--spacing-sm);
+
+    align-self:flex-start;
+
+    margin-top:auto;
+
+    padding:var(--spacing-sm) var(--spacing-md);
+
+    border-radius:var(--radius-medium);
+
+    background:var(--gradient-primary);
+
+    color:#fff;
+
+    font-weight:600;
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.method-link-button:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        var(--shadow-medium),
+        var(--shadow-glow);
+}
+
+/* ==========================================================
+   PARAMETER GROUP
+========================================================== */
+
+.parameter-group{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--spacing-md);
+}
+
+/* ==========================================================
+   RESPONSE BLOCK
+========================================================== */
+
+.response-block{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--spacing-md);
+}
+
+/* ==========================================================
+   ADAPTIVE
+========================================================== */
+
+@media (max-width:768px){
+
+    .method-info{
+        padding:var(--spacing-lg);
+    }
+
+    .method-header{
+        flex-direction:column;
+    }
+
+    .method-endpoint{
+        width:100%;
+        overflow:auto;
+    }
+
+    .related-methods{
+        grid-template-columns:1fr;
+    }
+
+    .method-link-button{
+        width:100%;
+    }
+
+}
+
+.method-header-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    padding:32px;
+
+    background:var(--glass-background);
+
+    backdrop-filter:blur(var(--glass-blur));
+
+    border:1px solid var(--glass-border);
+
+    border-radius:var(--radius-large);
+
+    box-shadow:var(--shadow-small);
+
+}
+
+
+.method-header-card h3{
+
+    margin:0;
+
+}
+
+
+.method-header-card p{
+
+    margin:0;
+
+}
+
+
+/* endpoint */
+
+.method-endpoint{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px 18px;
+
+    border-radius:16px;
+
+    background:
+        rgba(91,124,255,.08);
+
+    border:
+        1px solid rgba(91,124,255,.2);
+
+    color:var(--color-primary);
+
+    font-family:var(--font-code);
+
+    font-weight:600;
+
+}
+
+
+/* HTTP бейдж */
+
+.http-method{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:70px;
+
+    padding:6px 12px;
+
+    border-radius:10px;
+
+    background:var(--gradient-primary);
+
+    color:white;
+
+    font-size:.85rem;
+
+    font-weight:700;
+
+    letter-spacing:.05em;
+
+}
+
+
+/* ограничения */
+
+.method-restrictions{
+
+    padding-top:10px;
+
+    border-top:1px solid var(--color-border);
+
+}
+
+
+.method-restrictions h4{
+
+    margin-bottom:12px;
+
+}
+
+
+.method-restrictions ul{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+
+.method-restrictions li{
+
+    color:var(--color-text-secondary);
+
+}
+
+/* ==========================================================
+   BACK BUTTON
+========================================================== */
+
+.back-button{
+
+    position:fixed;
+
+    top:20px;
+    left:24px;
+
+    z-index:1000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:53px;
+    height:53px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(91,124,255,.18),
+            rgba(139,92,246,.25)
+        );
+
+    border:1px solid rgba(91,124,255,.35);
+
+    color:var(--color-primary);
+
+    backdrop-filter:blur(var(--glass-blur));
+
+    box-shadow:
+        0 4px 16px rgba(91,124,255,.15);
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+
+}
+
+
+.back-button:hover{
+
+    transform:translateX(-5px);
+
+    border-color:rgba(139,92,246,.55);
+
+    box-shadow:
+        var(--shadow-medium),
+        var(--shadow-glow);
+
+}
+
+
+.back-button svg{
+
+    width:24px;
+    height:24px;
+
+}
+
+.related-method-endpoint{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:16px;
+
+}
+
+
+.related-method-link{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:36px;
+    height:36px;
+
+    flex-shrink:0;
+
+    border-radius:12px;
+
+    color:var(--color-primary);
+
+    background:
+        rgba(91,124,255,.12);
+
+    border:1px solid rgba(91,124,255,.25);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        background var(--transition);
+
+}
+
+
+.related-method-link svg{
+
+    width:20px;
+    height:20px;
+
+}
+
+
+.related-method-link:hover{
+
+    transform:scale(1.1);
+
+    background:
+        rgba(91,124,255,.22);
+
+    box-shadow:
+        var(--shadow-glow);
+
+}

@@ -1,0 +1,318 @@
+/* ==========================================================
+   CARD
+========================================================== */
+
+.entity-card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    padding:var(--card-padding);
+
+    background:var(--glass-background);
+    backdrop-filter:blur(var(--glass-blur));
+
+    border:1px solid var(--glass-border);
+    border-radius:var(--radius-large);
+
+    box-shadow:var(--shadow-small);
+
+    overflow:hidden;
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition),
+        background var(--transition),
+        box-shadow var(--transition);
+}
+
+.entity-card::before{
+    content:"";
+
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+
+    height:2px;
+
+    background:var(--gradient-primary);
+
+    opacity:0;
+
+    transition:opacity var(--transition);
+}
+
+.entity-card:hover{
+    transform:translateY(-6px);
+
+    background:var(--color-surface-hover);
+
+    border-color:rgba(91,124,255,.35);
+
+    box-shadow:
+        var(--shadow-medium),
+        var(--shadow-glow);
+}
+
+.entity-card:hover::before{
+    opacity:1;
+}
+
+/* ==========================================================
+   Иконка
+========================================================== */
+
+.entity-icon{
+    width:var(--icon-size-large);
+    height:var(--icon-size-large);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:var(--spacing-md);
+
+    border-radius:var(--radius-medium);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(91,124,255,.18),
+            rgba(139,92,246,.18)
+        );
+
+    border:1px solid rgba(91,124,255,.25);
+
+    color:var(--color-primary);
+
+    font-size:var(--font-size-icon);
+
+    flex-shrink:0;
+}
+
+/* ==========================================================
+   Количество методов
+========================================================== */
+
+.entity-count{
+    margin-top:auto;
+
+    display:inline-flex;
+    align-items:center;
+
+    gap:var(--spacing-sm);
+
+    color:var(--color-primary);
+
+    font-size:var(--font-size-small);
+
+    font-weight:600;
+}
+
+/* ==========================================================
+   Методы
+========================================================== */
+
+.methods-list{
+    display:flex;
+    flex-direction:column;
+
+    gap:var(--spacing-md);
+
+    margin:var(--spacing-lg) 0;
+
+    padding:0;
+
+    list-style:none;
+}
+
+.method-item{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:var(--spacing-md);
+
+    padding:var(--method-padding);
+
+    border-radius:var(--radius-medium);
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid var(--color-border);
+
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+.method-item:hover{
+    transform:translateX(6px);
+
+    background:rgba(91,124,255,.08);
+
+    border-color:rgba(91,124,255,.30);
+}
+
+/* ==========================================================
+   Левая часть метода
+========================================================== */
+
+.method-preview{
+    display:flex;
+    flex-direction:column;
+
+    gap:var(--spacing-xs);
+
+    flex:1;
+}
+
+.method-title{
+    font-weight:600;
+
+    color:var(--color-text);
+
+    line-height:1.4;
+}
+
+.method-request{
+
+    color:var(--color-primary);
+
+    word-break:break-word;
+}
+
+/* ==========================================================
+   Кнопка перехода
+========================================================== */
+
+.method-link{
+    width:var(--icon-button-size);
+    height:var(--icon-button-size);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+    border-radius:var(--radius-medium);
+
+    background:var(--gradient-primary);
+
+    color:white;
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.method-link:hover{
+    transform:scale(1.08);
+
+    box-shadow:
+        var(--shadow-medium),
+        var(--shadow-glow);
+}
+
+/* ==========================================================
+   Все методы
+========================================================== */
+
+.entity-link{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:var(--spacing-sm);
+
+    align-self:flex-start;
+
+    margin-top:var(--spacing-sm);
+
+    padding:var(--button-padding-small);
+
+    border-radius:var(--radius-medium);
+
+    background:var(--gradient-primary);
+
+    color:white;
+
+    font-weight:600;
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.entity-link:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        var(--shadow-medium),
+        var(--shadow-glow);
+}
+
+/* ==========================================================
+   Карточка статистики
+========================================================== */
+
+.statistics-card{
+    padding:var(--card-padding-small);
+
+    background:var(--glass-background);
+
+    backdrop-filter:blur(var(--glass-blur));
+
+    border:1px solid var(--glass-border);
+
+    border-radius:var(--radius-large);
+
+    box-shadow:var(--shadow-small);
+}
+
+/* ==========================================================
+   Пустой результат
+========================================================== */
+
+.empty-card{
+    padding:var(--empty-card-padding);
+
+    text-align:center;
+
+    background:var(--glass-background);
+
+    backdrop-filter:blur(var(--glass-blur));
+
+    border:1px dashed var(--color-border);
+
+    border-radius:var(--radius-large);
+
+    color:var(--color-text-secondary);
+}
+
+/* ==========================================================
+   Адаптивность
+========================================================== */
+
+@media(max-width:768px){
+
+    .entity-card{
+        padding:var(--card-padding-small);
+    }
+
+    .method-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .method-link{
+        width:100%;
+        border-radius:var(--radius-small);
+    }
+
+}

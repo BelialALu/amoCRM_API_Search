@@ -1,0 +1,407 @@
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+button{
+
+    font:inherit;
+    border:none;
+    cursor:pointer;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:var(--spacing-sm);
+
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+
+    user-select:none;
+
+}
+
+
+button:hover{
+
+    transform:translateY(calc(-2px * var(--ui-scale)));
+
+}
+
+
+button:active{
+
+    transform:translateY(0);
+
+}
+
+
+button:disabled{
+
+    opacity:.55;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
+
+}
+
+
+
+/* ==========================================================
+   PRIMARY BUTTON
+========================================================== */
+
+.button-primary{
+
+    height:var(--button-height);
+
+    padding:0 var(--button-padding);
+
+    border-radius:var(--radius-medium);
+
+    color:white;
+
+    background:var(--gradient-primary);
+
+    font-size:var(--font-size-button);
+
+    font-weight:600;
+
+    box-shadow:var(--shadow-small);
+
+}
+
+
+.button-primary:hover{
+
+    box-shadow:
+        var(--shadow-medium),
+        var(--shadow-glow);
+
+}
+
+
+.button-primary:active{
+
+    filter:brightness(.96);
+
+}
+
+
+
+/* ==========================================================
+   SECONDARY BUTTON
+========================================================== */
+
+.button-secondary{
+
+    height:var(--button-height);
+
+    padding:0 var(--button-padding);
+
+    border-radius:var(--radius-medium);
+
+    background:var(--color-surface);
+
+    color:var(--color-text);
+
+    border:var(--size-1) solid var(--color-border);
+
+    font-size:var(--font-size-button);
+
+}
+
+
+.button-secondary:hover{
+
+    background:var(--color-surface-hover);
+
+    border-color:var(--color-primary);
+
+}
+
+
+
+/* ==========================================================
+   GHOST BUTTON
+========================================================== */
+
+.button-ghost{
+
+    height:var(--button-height);
+
+    padding:0 var(--button-padding);
+
+    border-radius:var(--radius-medium);
+
+    color:var(--color-text);
+
+    border:var(--size-1) solid transparent;
+
+    font-size:var(--font-size-button);
+
+}
+
+
+.button-ghost:hover{
+
+    background:rgba(255,255,255,.04);
+
+    border-color:var(--color-border);
+
+}
+
+
+
+/* ==========================================================
+   ICON BUTTON
+========================================================== */
+
+.icon-button{
+
+    width:var(--icon-button-size);
+
+    height:var(--icon-button-size);
+
+    border-radius:var(--radius-medium);
+
+    background:var(--color-surface);
+
+    border:var(--size-1) solid var(--color-border);
+
+    color:var(--color-text);
+
+    flex-shrink:0;
+
+}
+
+
+.icon-button:hover{
+
+    background:var(--color-surface-hover);
+
+    border-color:var(--color-primary);
+
+}
+
+
+
+/* ==========================================================
+   COPY BUTTON
+========================================================== */
+
+.copy-button{
+
+    width:var(--icon-button-size);
+
+    height:var(--icon-button-size);
+
+    border-radius:var(--radius-medium);
+
+    background:var(--color-surface);
+
+    border:var(--size-1) solid var(--color-border);
+
+    color:var(--color-primary);
+
+}
+
+
+.copy-button:hover{
+
+    background:var(--gradient-primary);
+
+    color:white;
+
+    border-color:transparent;
+
+    box-shadow:
+        var(--shadow-medium),
+        var(--shadow-glow);
+
+}
+
+
+
+/* ==========================================================
+   FAVORITE BUTTON
+========================================================== */
+
+.favorite-button{
+
+    width:var(--icon-button-size);
+
+    height:var(--icon-button-size);
+
+    border-radius:50%;
+
+    background:var(--color-surface);
+
+    border:var(--size-1) solid var(--color-border);
+
+    color:var(--color-text-muted);
+
+}
+
+
+.favorite-button:hover{
+
+    color:#ffd54f;
+
+    border-color:#ffd54f;
+
+}
+
+
+.favorite-button.active{
+
+    color:#ffc107;
+
+    background:rgba(255,193,7,.08);
+
+    border-color:#ffc107;
+
+}
+
+
+
+/* ==========================================================
+   SEARCH BUTTON
+========================================================== */
+
+.search-button{
+
+    min-width:var(--search-button-width);
+
+    height:var(--search-button-height);
+
+    padding:0 var(--button-padding-large);
+
+    border-radius:var(--radius-large);
+
+    color:white;
+
+    background:var(--gradient-primary);
+
+    font-size:var(--font-size-button);
+
+    font-weight:600;
+
+}
+
+
+.search-button:hover{
+
+    box-shadow:
+        var(--shadow-medium),
+        var(--shadow-glow);
+
+}
+
+
+
+/* ==========================================================
+   SMALL BUTTON
+========================================================== */
+
+.button-small{
+
+    height:var(--button-height-small);
+
+    padding:0 var(--button-padding-small);
+
+    border-radius:var(--radius-small);
+
+    font-size:var(--font-size-small);
+
+}
+
+
+
+/* ==========================================================
+   LARGE BUTTON
+========================================================== */
+
+.button-large{
+
+    height:var(--button-height-large);
+
+    padding:0 var(--button-padding-large);
+
+    border-radius:var(--radius-large);
+
+    font-size:var(--font-size-button-large);
+
+}
+
+
+
+/* ==========================================================
+   FULL WIDTH
+========================================================== */
+
+.button-block{
+
+    width:100%;
+
+}
+
+
+
+/* ==========================================================
+   LOADING
+========================================================== */
+
+.button-loading{
+
+    pointer-events:none;
+
+    opacity:.8;
+
+}
+
+
+.button-loading::after{
+
+    content:"";
+
+    width:var(--loader-size);
+
+    height:var(--loader-size);
+
+    border-radius:50%;
+
+    border:
+        var(--size-2) solid rgba(255,255,255,.35);
+
+    border-top-color:white;
+
+    animation:button-spin .7s linear infinite;
+
+}
+
+
+
+/* ==========================================================
+   ANIMATION
+========================================================== */
+
+@keyframes button-spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}

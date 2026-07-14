@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-
+import { HiOutlineArrowTopRightOnSquare, HiArrowLeft } from "react-icons/hi2";
 import { parameters } from "../data/parameters";
 
 function MethodInfo({
     method,
     methodsMap,
     showRelatedMethods = false,
-    splitMainParams = false
+    splitMainParams = false,
+    showBackButton = false
 }) {
 
     const getParameter = (parameterId) => {
@@ -17,6 +18,7 @@ function MethodInfo({
         method.responseParams?.filter(
             parameter => !method.mainResponseParams?.includes(parameter)
         ) || [];
+
 
     const renderParametersTable = (parameterIds) => (
         <table>
@@ -37,7 +39,9 @@ function MethodInfo({
                         <tr key={parameterId}>
                             <td>{parameter?.name || parameterId}</td>
                             <td>{parameter?.type || "-"}</td>
-                            <td>{parameter?.description || "Описание отсутствует"}</td>
+                            <td>
+                                {parameter?.description || "Описание отсутствует"}
+                            </td>
                         </tr>
                     );
 
@@ -46,183 +50,356 @@ function MethodInfo({
         </table>
     );
 
+
     return (
         <>
-
-            <h2>{method.title}</h2>
-
-            <h3>
-                {method.method} {method.endpoint}
-            </h3>
-
-            <p>{method.description}</p>
-
-            {method.restrictions?.length > 0 && (
-                <>
-                    <h3>Ограничения</h3>
-
-                    <ul>
-                        {method.restrictions.map((restriction, index) => (
-                            <li key={index}>{restriction}</li>
-                        ))}
-                    </ul>
-                </>
+            {showBackButton && (
+            <Link
+                to="/"
+                className="back-button"
+                title="Вернуться на главную"
+            >
+                <HiArrowLeft />
+            </Link>
             )}
+            
+            <div className="method-info">
 
-            {splitMainParams ? (
-                <>
-                    {method.requestParams?.length > 0 && (
-                        <>
-                            <h3>Обязательные параметры запроса</h3>
-                            {renderParametersTable(method.requestParams)}
-                        </>
+                <h2>{method.title}</h2>
+
+                <div className="method-header-card">
+
+                    <div className="method-endpoint">
+
+                        <span className="http-method">
+                            {method.method}
+                        </span>
+
+                        <span>
+                            {method.endpoint}
+                        </span>
+
+                    </div>
+
+                    <p>
+                        {method.description}
+                    </p>
+
+
+                    {method.restrictions?.length > 0 && (
+
+                        <div className="method-restrictions">
+
+                            <h4>
+                                Ограничения
+                            </h4>
+
+                            <ul>
+                                {method.restrictions.map((restriction, index) => (
+                                    <p key={index}>
+                                        {restriction}
+                                    </p>
+                                ))}
+                            </ul>
+
+                        </div>
+
                     )}
 
-                    {method.mainRequestParams?.length > 0 && (
-                        <details>
-                            <summary>
-                                <b>Необязательные параметры запроса</b>
-                            </summary>
+                </div>
 
-                            {renderParametersTable(method.mainRequestParams)}
-                        </details>
-                    )}
-                </>
-            ) : (
-                <>
-                    {method.requestParams?.length > 0 && (
-                        <details>
-                            <summary>
-                                <b>Обязательные параметры запроса</b>
-                            </summary>
 
-                            {renderParametersTable(method.requestParams)}
-                        </details>
-                    )}
+                <div className="method-info">
+                {splitMainParams ? (
 
-                    {method.mainRequestParams?.length > 0 && (
-                        <details>
-                            <summary>
-                                <b>Необязательные параметры запроса</b>
-                            </summary>
-
-                            {renderParametersTable(method.mainRequestParams)}
-                        </details>
-                    )}
-                </>
-            )}
-
-            {splitMainParams ? (
-                method.mainResponseParams?.length > 0 ? (
                     <>
-                        <h3>Наиболее часто используемые параметры ответа</h3>
-                        {renderParametersTable(method.mainResponseParams)}
 
-                        {otherResponseParams.length > 0 && (
+                        {method.requestParams?.length > 0 && (
+                            <>
+                                <h4>
+                                    Обязательные параметры запроса
+                                </h4>
+
+                                {renderParametersTable(method.requestParams)}
+                            </>
+                        )}
+
+
+                        {method.mainRequestParams?.length > 0 && (
+
                             <details>
+
                                 <summary>
-                                    <b>Дополнительные параметры ответа</b>
+                                    <h4>
+                                        Необязательные параметры запроса
+                                    </h4>
                                 </summary>
 
-                                {renderParametersTable(otherResponseParams)}
+                                {renderParametersTable(method.mainRequestParams)}
+
                             </details>
+
                         )}
+
                     </>
+
                 ) : (
-                    method.responseParams?.length > 0 && (
+
+                    <>
+
+                        {method.requestParams?.length > 0 && (
+
+                            <details>
+
+                                <summary>
+                                    <b>
+                                        Обязательные параметры запроса
+                                    </b>
+                                </summary>
+
+                                {renderParametersTable(method.requestParams)}
+
+                            </details>
+
+                        )}
+
+
+                        {method.mainRequestParams?.length > 0 && (
+
+                            <details>
+
+                                <summary>
+                                    <b>
+                                        Необязательные параметры запроса
+                                    </b>
+                                </summary>
+
+                                {renderParametersTable(method.mainRequestParams)}
+
+                            </details>
+
+                        )}
+
+                    </>
+
+                )}
+            </div>
+
+            <div className="method-info">
+                {splitMainParams ? (
+
+                    method.mainResponseParams?.length > 0 ? (
+
                         <>
-                            <h3>Параметры ответа</h3>
-                            {renderParametersTable(method.responseParams)}
+
+                            <h4>
+                                Наиболее часто используемые параметры ответа
+                            </h4>
+
+                            {renderParametersTable(method.mainResponseParams)}
+
+
+                            {otherResponseParams.length > 0 && (
+
+                                <details>
+
+                                    <summary>
+                                        <h4>
+                                            Дополнительные параметры ответа
+                                        </h4>
+                                    </summary>
+
+                                    {renderParametersTable(otherResponseParams)}
+
+                                </details>
+
+                            )}
+
                         </>
+
+                    ) : (
+
+                        method.responseParams?.length > 0 && (
+
+                            <>
+
+                                <h4>
+                                    Параметры ответа
+                                </h4>
+
+                                {renderParametersTable(method.responseParams)}
+
+                            </>
+
+                        )
+
                     )
-                )
-            ) : (
-                method.responseParams?.length > 0 && (
-                    <details>
-                        <summary>
-                            <b>Параметры ответа</b>
-                        </summary>
 
-                        {renderParametersTable(method.responseParams)}
-                    </details>
-                )
-            )}
+                ) : (
 
-            {method.responseCodes?.length > 0 && (
-                <>
-                    <h3>Коды ответа</h3>
+                    method.responseParams?.length > 0 && (
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Код</th>
-                                <th>Описание</th>
-                            </tr>
-                        </thead>
+                        <details>
 
-                        <tbody>
-                            {method.responseCodes.map((response) => (
-                                <tr key={response.code}>
-                                    <td>{response.code}</td>
-                                    <td>{response.description}</td>
+                            <summary>
+                                Параметры ответа
+                            </summary>
+
+                            {renderParametersTable(method.responseParams)}
+
+                        </details>
+
+                    )
+
+                )}
+            </div>
+
+            <div className="method-info">
+                {method.responseCodes?.length > 0 && (
+
+                    <>
+
+                        <h4>
+                            Коды ответа
+                        </h4>
+
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Код</th>
+                                    <th>Описание</th>
                                 </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {method.responseCodes.map((response) => (
+
+                                    <tr key={response.code}>
+
+                                        <td>
+                                            {response.code}
+                                        </td>
+
+                                        <td>
+                                            {response.description}
+                                        </td>
+
+                                    </tr>
+
+                                ))}
+
+                            </tbody>
+
+                        </table>
+
+                    </>
+
+                )}
+
+                </div>
+                <div className="method-info">
+
+                {method.notes?.length > 0 && (
+
+                    <>
+
+                        <h4>
+                            Примечания
+                        </h4>
+
+
+                        <ul>
+
+                            {method.notes.map((note, index) => (
+
+                                <p key={index}>
+                                    {note}
+                                </p>
+
                             ))}
-                        </tbody>
-                    </table>
-                </>
-            )}
 
-            {method.notes?.length > 0 && (
-                <>
-                    <h3>Примечания</h3>
+                        </ul>
 
-                    <ul>
-                        {method.notes.map((note, index) => (
-                            <li key={index}>{note}</li>
-                        ))}
-                    </ul>
-                </>
-            )}
+                    </>
 
-            {showRelatedMethods && method.relatedMethods?.length > 0 && (
-                <>
-                    <h3>Связанные методы</h3>
+                )}
+                </div>
 
-                    <ul>
-                        {method.relatedMethods.map((relatedMethodId) => {
 
-                            const relatedMethod = methodsMap?.[relatedMethodId];
+                {showRelatedMethods && method.relatedMethods?.length > 0 && (
 
-                            return (
-                                <li key={relatedMethodId}>
-                                    {relatedMethod ? (
-                                        <>
-                                            <strong>{relatedMethod.title}</strong>
-                                            <br />
+                    <>
 
-                                            <code>
-                                                {relatedMethod.method} {relatedMethod.endpoint}
-                                            </code>
+                        <h4>
+                            Связанные методы
+                        </h4>
 
-                                            <br />
 
-                                            <Link
-                                                to={`/method/${relatedMethod.id}`}
-                                                className="method-link-button"
-                                            >
-                                                Подробнее
-                                            </Link>
-                                        </>
-                                    ) : (
-                                        relatedMethodId
-                                    )}
-                                </li>
-                            );
+                        <div className="related-methods">
 
-                        })}
-                    </ul>
-                </>
-            )}
+                            {method.relatedMethods.map((relatedMethodId) => {
+
+                                const relatedMethod =
+                                    methodsMap?.[relatedMethodId];
+
+
+                                return (
+
+                                    <div
+                                        key={relatedMethodId}
+                                        className="related-method"
+                                    >
+
+                                        {relatedMethod ? (
+
+                                            <>
+
+                                                <p>
+                                                    {relatedMethod.title}
+                                                </p>
+
+                                                <div className="related-method-endpoint">
+                                                    <code>
+                                                        {relatedMethod.method}{" "}
+                                                        {relatedMethod.endpoint}
+                                                    </code>
+
+                                                <Link
+                                                    to={`/method/${relatedMethod.id}`}
+                                                    className="related-method-link"
+                                                    title="Перейти к методу"
+                                                    >
+                                                    <HiOutlineArrowTopRightOnSquare />
+                                                </Link>
+
+                                                </div>
+                                            </>
+
+                                        ) : (
+
+                                            relatedMethodId
+
+                                        )}
+
+                                    </div>
+
+                                );
+
+                            })}
+
+                        </div>
+
+                    </>
+
+                )}
+
+            </div>
 
         </>
     );

@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom";
-
 import { methods } from "../data/methods";
-
 import MethodInfo from "../components/MethodInfo";
 
 function MethodPage() {
@@ -22,12 +20,15 @@ function MethodPage() {
     }
 
     return (
-        <MethodInfo
-            method={method}
-            methodsMap={methodsMap}
-            showRelatedMethods={true}
-            splitMainParams={true}
-        />
+        <div className="method-page">
+            <MethodInfo
+                method={method}
+                methodsMap={methodsMap}
+                showRelatedMethods={false}
+                splitMainParams={false}
+                showBackButton={true}  
+            />
+        </div>
     );
 
 }

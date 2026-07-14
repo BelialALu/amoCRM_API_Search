@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { entities } from "../data/entities";
 
 function AdvancedSearch({
     requestMethod,
     setRequestMethod,
+
+    selectedEntity,
+    setSelectedEntity,
+
     searchInRequestParams,
     setSearchInRequestParams,
-    searchInResponseParams, 
+
+    searchInResponseParams,
     setSearchInResponseParams,
+
     searchInAllParams,
     setSearchInAllParams
 }) {
@@ -14,20 +21,22 @@ function AdvancedSearch({
     const [open, setOpen] = useState(false);
 
     return (
-        <div>
 
+        <>
             <button
                 type="button"
+                className="search-button"
                 onClick={() => setOpen(!open)}
             >
                 Расширенный поиск
             </button>
 
+
             {open && (
 
-                <div>
+                <div className="advanced-search-panel">
 
-                    <div>
+                    <div className="advanced-search">
 
                         <label htmlFor="request-method">
                             Метод запроса:
@@ -48,64 +57,87 @@ function AdvancedSearch({
                         </select>
 
                     </div>
+                    
+                    <div className="advanced-search">
+                        <label htmlFor="entity">
+                            Раздел:
+                        </label>
+
+                        <select
+                            id="entity"
+                            value={selectedEntity}
+                            onChange={(e) => setSelectedEntity(e.target.value)}
+                        >
+                            <option value="">Все</option>
+
+                        {entities.map(entity => (
+                            <option
+                                key={entity.id}
+                                value={entity.id}
+                            >
+                                {entity.title}
+                            </option>
+                        ))}
+                    </select>
+
+                </div>
+
 
                     <label>
-
-                        <input
-                            type="checkbox"
-                            checked={searchInResponseParams}
-                            disabled={searchInAllParams}
-                            onChange={(event) =>
-                                setSearchInResponseParams(
-                                    event.target.checked
-                                )
-                            }
-                        />
-
-                        Искать по параметрам ответа
-
-                    </label>
-
-                    <label>
-
                         <input
                             type="checkbox"
                             checked={searchInRequestParams}
                             disabled={searchInAllParams}
                             onChange={(event) =>
-                                setSearchInRequestParams(
-                                    event.target.checked
-                                )
+                                setSearchInRequestParams(event.target.checked)
                             }
                         />
 
                         Искать по параметрам запроса
-
                     </label>
+
 
                     <label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={searchInAllParams}
-                                onChange={(event) => {
-                                    const checked = event.target.checked;
-                                    setSearchInAllParams(checked);
+                        <input
+                            type="checkbox"
+                            checked={searchInResponseParams}
+                            disabled={searchInAllParams}
+                            onChange={(event) =>
+                                setSearchInResponseParams(event.target.checked)
+                            }
+                        />
 
-                                    if (checked) {
-                                        setSearchInRequestParams(false);
-                                        setSearchInResponseParams(false);
-                                    }
-                                }}
-                            />
+                        Искать по параметрам ответа
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={searchInAllParams}
+                            onChange={(event) => {
+
+                                const checked = event.target.checked;
+
+                                setSearchInAllParams(checked);
+
+                                if (checked) {
+                                    setSearchInRequestParams(false);
+                                    setSearchInResponseParams(false);
+                                }
+
+                            }}
+                        />
+
                         Искать по всем параметрам
                     </label>
-                    </label>
+
                 </div>
 
             )}
 
-        </div>
+        </>
+
     );
 
 }
