@@ -58,7 +58,17 @@ export const parameters = {
         tags_to_delete: { name: "tags_to_delete", type: "array", description: "Массив тегов для удаления из сделки." },
         "tags_to_delete[0]": { name: "tags_to_delete[0]", type: "object", description: "Модель удаляемого тега." },
         "tags_to_delete[0][id]": { name: "tags_to_delete[0][id]", type: "array", description: "Идентификатор удаляемого тега." },
-        "tags_to_delete[0][name]": { name: "tags_to_delete[0][name]", type: "array", description: "Название удаляемого тега." }
+        "tags_to_delete[0][name]": { name: "tags_to_delete[0][name]", type: "array", description: "Название удаляемого тега." },
+        with: { name: "with", type: "string", description: "Параметр для указания связанных сущностей, которые необходимо получить. Может содержать несколько значений, указанных через запятую." },
+        page: { name: "page", type: "int", description: "Страница выборки." },
+        limit: { name: "limit", type: "int", description: "Количество возвращаемых сущностей за один запрос. Максимальное значение — 250." },
+        query: { name: "query", type: "string", description: "Поисковый запрос по заполненным полям сущности." },
+        filter: { name: "filter", type: "object", description: "Фильтр для отбора сущностей." },
+        order: { name: "order", type: "object", description: "Сортировка результатов списка. Доступные поля: created_at, updated_at, id. Возможные значения: asc, desc." },
+        contact_id: { name: "contact_id", type: "int | null", description: "Идентификатор контакта, связанного со сделкой." },
+        company_id: { name: "company_id", type: "int | null", description: "Идентификатор компании, связанной со сделкой." },
+        merged: { name: "merged", type: "bool", description: "Признак того, что найден дубликат сущности и выполнено объединение." },
+        request_id: { name: "request_id", type: "string[]", description: "Массив пользовательских идентификаторов, переданных вместе с сущностями." },
     },
 
     contacts: {

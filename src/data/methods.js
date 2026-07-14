@@ -15,7 +15,14 @@ export const methods = {
         "Метод доступен в соответствии с правами пользователя."
     ],
 
-    requestParams: [],
+    mainRequestParams: [
+        "with",
+        "page",
+        "limit",
+        "query",
+        "filter",
+        "order"
+    ],
 
     mainResponseParams: [
         "id",
@@ -85,7 +92,7 @@ export const methods = {
         },
         {
             code: 401,
-            description: "Пользователь не авторизован"
+            description: "Пользователь не авторизован(недостаточно прав)"
         },
         {
             code: 402,
@@ -103,7 +110,8 @@ export const methods = {
         "get-lead-by-id",
         "add-leads",
         "update-leads"
-    ]
+    ],
+
     },
     
     {
@@ -124,6 +132,10 @@ export const methods = {
     requestParams: [
         "id"
     ],
+    
+    mainRequestParams: [
+        "with"
+    ],
 
     mainResponseParams: [
         "id",
@@ -202,7 +214,7 @@ export const methods = {
     ],
 
     notes: [
-        "Идентификатор сделки передается в URL запроса.",
+        "Идентификатор сделки передается в URL запроса, либо в карточке сделки в левом верхнем углу.",
         "Связанные сущности возвращаются в блоке _embedded.",
         "Для получения дополнительных связанных объектов используется параметр with."
     ],
@@ -213,25 +225,23 @@ export const methods = {
         "update-leads",
     ]
     },
-    
-
 
     {
     id: "add-leads",
     entity: "leads",
 
-    title: "Добавление сделки",
+    title: "Добавление сделок",
 
     method: "POST",
     endpoint: "/api/v4/leads",
 
-    description: "Метод позволяет добавить новую сделку в аккаунт.",
+    description: "Метод позволяет добавлять сделки в аккаунт пакетно.",
 
     restrictions: [
         "Метод доступен в соответствии с правами пользователя."
     ],
 
-    requestParams: [
+    mainRequestParams: [
         "name",
         "price",
         "status_id",
@@ -263,19 +273,6 @@ export const methods = {
         "_embedded[source][type]"
     ],
 
-    mainRequestParams: [
-        "name",
-        "price",
-        "status_id",
-        "pipeline_id",
-        "responsible_user_id"
-    ],
-
-    mainResponseParams: [
-        "id",
-        "request_id"
-    ],
-
     responseParams: [
         "id",
         "request_id"
@@ -284,35 +281,27 @@ export const methods = {
     responseCodes: [
         {
             code: 200,
-            description: "Запрос выполнен успешно"
+            description: "Сделки были успешно созданы"
         },
         {
             code: 400,
-            description: "Переданы некорректные данные"
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
         },
         {
             code: 401,
             description: "Пользователь не авторизован"
-        },
-        {
-            code: 402,
-            description: "Аккаунт не оплачен"
-        },
-        {
-            code: 403,
-            description: "Недостаточно прав для выполнения запроса"
         }
     ],
 
     notes: [
-        "Идентификатор созданной сделки возвращается в поле id.",
-        "Идентификатор запроса возвращается в поле request_id."
+        "Обязательные поля для данного метода отсутствуют."
     ],
 
     relatedMethods: [
         "get-leads",
         "get-lead-by-id",
         "update-leads",
+        "add-complex-leads"
     ]
     },
 
@@ -325,7 +314,7 @@ export const methods = {
     method: "POST",
     endpoint: "/api/v4/leads/complex",
 
-    description: "Метод позволяет добавлять сделки вместе с контактом и компанией в аккаунт.",
+    description: "Метод позволяет добавлять сделки c контактом и компанией в аккаунт пакетно.",
 
     restrictions: [
         "Метод доступен в соответствии с правами пользователя.",
@@ -337,7 +326,7 @@ export const methods = {
         "При создании нового контакта и компании они автоматически связываются между собой."
     ],
 
-    requestParams: [
+    mainRequestParams: [
         "name",
         "price",
         "status_id",
@@ -350,46 +339,22 @@ export const methods = {
         "loss_reason_id",
         "responsible_user_id",
         "custom_fields_values",
-
         "tags_to_add",
         "tags_to_add[0]",
         "tags_to_add[0][id]",
         "tags_to_add[0][name]",
-
         "_embedded",
         "_embedded[tags]",
         "_embedded[tags][0]",
         "_embedded[tags][0][id]",
-
         "_embedded[contacts]",
         "_embedded[contacts][0]",
-
         "_embedded[companies]",
         "_embedded[companies][0]",
-
         "_embedded[metadata]",
         "_embedded[metadata][category]",
-
         "_embedded[source][external_id]",
         "_embedded[source][type]"
-    ],
-
-    mainRequestParams: [
-        "name",
-        "price",
-        "status_id",
-        "pipeline_id",
-        "responsible_user_id",
-        "_embedded[contacts]",
-        "_embedded[companies]"
-    ],
-
-    mainResponseParams: [
-        "id",
-        "contact_id",
-        "company_id",
-        "merged",
-        "request_id"
     ],
 
     responseParams: [
@@ -403,7 +368,7 @@ export const methods = {
     responseCodes: [
         {
             code: 200,
-            description: "Запрос выполнен успешно"
+            description: "Сделки были успешно созданы"
         },
         {
             code: 400,
@@ -411,22 +376,14 @@ export const methods = {
         },
         {
             code: 401,
-            description: "Пользователь не авторизован"
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
         },
-        {
-            code: 402,
-            description: "Аккаунт не оплачен"
-        },
-        {
-            code: 403,
-            description: "Недостаточно прав для выполнения запроса"
-        }
     ],
 
     notes: [
-        "В ответе возвращаются идентификаторы созданной сделки, контакта и компании.",
-        "Поле merged содержит информацию о результате проверки на дубли.",
-        "Идентификатор запроса возвращается в поле request_id."
+        "Метод возвращает информацию о созданных или обновлённых(если найден дубль) сущностях.",
+        "Добовляемые данные могут быть проверены в контроле дублей.",
+        "В поле request_id, если не найдены дубли, всегда будет 1 элемент. Множественное значение может вернуться в случае, если передано несколько дублей одной и той же сделки. В такой случае вернется результирующая сделка, а в массиве request_id будут идентификаторы переданных сделок, которые являются дублями."
     ],
 
     relatedMethods: [
@@ -445,13 +402,13 @@ export const methods = {
     method: "PATCH",
     endpoint: "/api/v4/leads",
 
-    description: "Метод позволяет редактировать существующие сделки. Для редактирования одной сделки можно использовать endpoint /api/v4/leads/{id}.",
+    description: "Метод позволяет редактировать сделки пакетно.",
 
     restrictions: [
         "Метод доступен в соответствии с правами пользователя."
     ],
 
-    requestParams: [
+    mainRequestParams: [
         "id",
         "name",
         "price",
@@ -465,36 +422,19 @@ export const methods = {
         "loss_reason_id",
         "responsible_user_id",
         "custom_fields_values",
-
         "tags_to_add",
         "tags_to_add[0]",
         "tags_to_add[0][id]",
         "tags_to_add[0][name]",
-
         "tags_to_delete",
         "tags_to_delete[0]",
         "tags_to_delete[0][id]",
         "tags_to_delete[0][name]",
-
         "_embedded",
         "_embedded[tags]",
         "_embedded[tags][0]",
         "_embedded[tags][0][id]",
         "_embedded[tags][0][name]"
-    ],
-
-    mainRequestParams: [
-        "id",
-        "name",
-        "price",
-        "status_id",
-        "pipeline_id",
-        "responsible_user_id"
-    ],
-
-    mainResponseParams: [
-        "id",
-        "updated_at"
     ],
 
     responseParams: [
@@ -505,30 +445,21 @@ export const methods = {
     responseCodes: [
         {
             code: 200,
-            description: "Запрос выполнен успешно"
+            description: "Сделки были успешно изменены"
         },
         {
             code: 400,
-            description: "Переданы некорректные данные"
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
         },
         {
             code: 401,
             description: "Пользователь не авторизован"
         },
-        {
-            code: 402,
-            description: "Аккаунт не оплачен"
-        },
-        {
-            code: 403,
-            description: "Недостаточно прав для выполнения запроса"
-        }
     ],
 
     notes: [
-        "Для редактирования одной сделки можно использовать endpoint /api/v4/leads/{id}.",
-        "При редактировании можно добавлять и удалять теги с помощью параметров tags_to_add и tags_to_delete.",
-        "В ответе возвращается идентификатор сделки и время последнего обновления."
+        "Можно добавить ID сделки в метод для редактирования конкретной сделки (/api/v4/leads/{id})",
+        "При редактировании пакетно передается массив из объектов-сделок, при редактировании одной сделки, передается просто модель сделки.",
     ],
 
     relatedMethods: [

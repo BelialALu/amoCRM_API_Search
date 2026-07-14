@@ -13,11 +13,6 @@ function MethodInfo({
         return parameters[method.entity]?.[parameterId];
     };
 
-    const otherRequestParams =
-        method.requestParams?.filter(
-            parameter => !method.mainRequestParams?.includes(parameter)
-        ) || [];
-
     const otherResponseParams =
         method.responseParams?.filter(
             parameter => !method.mainResponseParams?.includes(parameter)
@@ -76,49 +71,78 @@ function MethodInfo({
 
             {splitMainParams ? (
                 <>
-                    {method.mainRequestParams?.length > 0 && (
+                    {method.requestParams?.length > 0 && (
                         <>
-                            <h3>Основные параметры запроса</h3>
-                            {renderParametersTable(method.mainRequestParams)}
+                            <h3>Обязательные параметры запроса</h3>
+                            {renderParametersTable(method.requestParams)}
                         </>
                     )}
 
-                    {otherRequestParams.length > 0 && (
+                    {method.mainRequestParams?.length > 0 && (
                         <details>
-                            <summary><b>Дополнительные параметры запроса</b></summary>
-                            {renderParametersTable(otherRequestParams)}
+                            <summary>
+                                <b>Необязательные параметры запроса</b>
+                            </summary>
+
+                            {renderParametersTable(method.mainRequestParams)}
                         </details>
                     )}
                 </>
             ) : (
-                method.requestParams?.length > 0 && (
-                    <details>
-                        <summary><b>Параметры запроса</b></summary>
-                        {renderParametersTable(method.requestParams)}
-                    </details>
-                )
+                <>
+                    {method.requestParams?.length > 0 && (
+                        <details>
+                            <summary>
+                                <b>Обязательные параметры запроса</b>
+                            </summary>
+
+                            {renderParametersTable(method.requestParams)}
+                        </details>
+                    )}
+
+                    {method.mainRequestParams?.length > 0 && (
+                        <details>
+                            <summary>
+                                <b>Необязательные параметры запроса</b>
+                            </summary>
+
+                            {renderParametersTable(method.mainRequestParams)}
+                        </details>
+                    )}
+                </>
             )}
 
             {splitMainParams ? (
-                <>
-                    {method.mainResponseParams?.length > 0 && (
-                        <>
-                            <h3>Основные параметры ответа</h3>
-                            {renderParametersTable(method.mainResponseParams)}
-                        </>
-                    )}
+                method.mainResponseParams?.length > 0 ? (
+                    <>
+                        <h3>Наиболее часто используемые параметры ответа</h3>
+                        {renderParametersTable(method.mainResponseParams)}
 
-                    {otherResponseParams.length > 0 && (
-                        <details>
-                            <summary><b>Дополнительные параметры ответа</b></summary>
-                            {renderParametersTable(otherResponseParams)}
-                        </details>
-                    )}
-                </>
+                        {otherResponseParams.length > 0 && (
+                            <details>
+                                <summary>
+                                    <b>Дополнительные параметры ответа</b>
+                                </summary>
+
+                                {renderParametersTable(otherResponseParams)}
+                            </details>
+                        )}
+                    </>
+                ) : (
+                    method.responseParams?.length > 0 && (
+                        <>
+                            <h3>Параметры ответа</h3>
+                            {renderParametersTable(method.responseParams)}
+                        </>
+                    )
+                )
             ) : (
                 method.responseParams?.length > 0 && (
                     <details>
-                        <summary><b>Параметры ответа</b></summary>
+                        <summary>
+                            <b>Параметры ответа</b>
+                        </summary>
+
                         {renderParametersTable(method.responseParams)}
                     </details>
                 )
@@ -167,7 +191,7 @@ function MethodInfo({
                     <ul>
                         {method.relatedMethods.map((relatedMethodId) => {
 
-                            const relatedMethod = methodsMap[relatedMethodId];
+                            const relatedMethod = methodsMap?.[relatedMethodId];
 
                             return (
                                 <li key={relatedMethodId}>
