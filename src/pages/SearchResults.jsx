@@ -9,6 +9,7 @@ import { searchMethods } from "../utils/searchMethods";
 import SearchBar from "../components/SearchBar";
 import AdvancedSearch from "../components/AdvancedSearch";
 import MethodInfo from "../components/MethodInfo";
+import PageContents from "../components/PageContents";
 
 
 function SearchResults() {
@@ -133,6 +134,13 @@ function SearchResults() {
         </Link>
 
         <div className="search-results">
+            <PageContents
+               title="Содержание"
+                items={results.map(result => ({
+                    id: result.method.id,
+                    title: result.method.title
+                }))}
+            />
 
             <div className="search-section">
 

@@ -6,6 +6,7 @@ import { methods } from "../data/methods";
 import MethodInfo from "../components/MethodInfo";
 import { Link } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi2";
+import PageContents from "../components/PageContents";
 
 function EntityPage() {
 
@@ -39,6 +40,14 @@ function EntityPage() {
         </Link>
 
         <div className="entity-page">
+
+            <PageContents
+                title="Содержание"
+                items={entityMethods.map(method => ({
+                        id: method.id,
+                       title: method.title
+                }))}
+            />
 
             <h1>{entity.title}</h1>
 

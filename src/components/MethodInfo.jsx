@@ -63,7 +63,10 @@ function MethodInfo({
             </Link>
             )}
             
-            <div className="method-info">
+            <div
+                id={method.id}
+                className="method-info"
+            >
 
                 <h2>{method.title}</h2>
 
