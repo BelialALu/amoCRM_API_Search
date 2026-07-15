@@ -1,7 +1,15 @@
 function SearchBar({
     searchQuery,
-    setSearchQuery
+    setSearchQuery,
+    onSearch
 }) {
+
+    const handleKeyDown = (event) => {
+
+        if (event.key === "Enter") {
+            onSearch();
+        }
+    };
 
     return (
 
@@ -12,6 +20,7 @@ function SearchBar({
                 placeholder="Введите название метода или запрос..."
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
+                onKeyDown={handleKeyDown}
             />
 
         </div>

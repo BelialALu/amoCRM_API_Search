@@ -109,6 +109,7 @@ const entitiesCount = isFiltering
                     <SearchBar
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
+                        onSearch={handleSearch}
                     />
 
 

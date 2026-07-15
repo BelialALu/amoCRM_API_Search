@@ -150,6 +150,7 @@ function SearchResults() {
                     <SearchBar
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
+                        onSearch={handleSearch}
                     />
 
 
