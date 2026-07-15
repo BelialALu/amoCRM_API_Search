@@ -432,14 +432,15 @@ hr{
 
 .method-page{
 
-    padding-left:78px;
-    padding-right:78px;
+    padding-left:79px;
+    padding-right:79px;
 
 }
 
 
 .entity-page {
     padding-right: 330px;
+    padding-left: 79px;
 }
 
 .page-contents {
@@ -502,8 +503,8 @@ hr{
 }
 
 .search-results{
-    padding-top:78px;
-    padding-left:10px;
+    padding-top:79px;
+    padding-left:79px;
     padding-right:330px;
 
 }
@@ -621,4 +622,12 @@ hr{
 html{
 
     scroll-behavior:smooth;
+}
+
+
+mark {
+    background: #c5e3fa;
+    color: inherit;
+    padding: 1px 3px;
+    border-radius: 4px;
 }

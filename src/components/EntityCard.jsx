@@ -6,7 +6,8 @@ import { methods } from "../data/methods";
     function EntityCard({
         entity,
         matchedMethods = [],
-        isSearching = false
+        isSearching = false,
+        searchQuery = ""
     }) {
 
     const entityMethods = methods[entity.id] || [];
@@ -15,6 +16,30 @@ import { methods } from "../data/methods";
         matchedMethods.length > 0
             ? matchedMethods
             : entityMethods;
+    
+    const highlightText = (text) => {
+
+    if (!searchQuery.trim()) {
+        return text;
+    }
+
+    const escaped = searchQuery.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+    const parts = String(text).split(
+        new RegExp(`(${escaped})`, "gi")
+    );
+
+    return parts.map((part, index) =>
+
+        part.toLowerCase() === searchQuery.toLowerCase()
+
+            ? <mark key={index}>{part}</mark>
+
+            : part
+
+    );
+
+};
 
     return (
         <div className="entity-card">
@@ -39,11 +64,12 @@ import { methods } from "../data/methods";
                             <div className="method-preview">
 
                                 <div className="method-title">
-                                    {method.title}
+                                    {highlightText(method.title)}
                                 </div>
 
                                 <div className="method-request">
-                                    {method.method} {method.endpoint}
+                                    {highlightText(method.method)}{" "}
+                                    {highlightText(method.endpoint)}
                                 </div>
 
                             </div>

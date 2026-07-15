@@ -161,6 +161,7 @@ const entitiesCount = isFiltering
                                 searchQuery.trim() !== "" &&
                                 matchedMethods.length > 0
                             }
+                            searchQuery={searchQuery}
                         />
 
                     );

@@ -471,7 +471,779 @@ export const methods = {
     }
     ],
 
-    contacts: [],
+    contacts: [
+{
+    id: "get-contacts",
+    entity: "contacts",
 
-    companies: []
+    title: "Получение списка контактов",
+
+    method: "GET",
+    endpoint: "/api/v4/contacts",
+
+    description: "Метод позволяет получить список контактов в аккаунте.",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    mainRequestParams: [
+        "with",
+        "page",
+        "limit",
+        "query",
+        "filter",
+        "order"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "first_name",
+        "last_name",
+        "responsible_user_id",
+        "created_at",
+        "updated_at"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "first_name",
+        "last_name",
+        "responsible_user_id",
+        "group_id",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at",
+        "is_deleted",
+        "closest_task_at",
+        "custom_fields_values",
+        "account_id",
+        "_embedded",
+        "_embedded[tags]",
+        "_embedded[tags][0]",
+        "_embedded[tags][0][id]",
+        "_embedded[tags][0][name]",
+        "_embedded[tags][0][color]",
+        "_embedded[companies]",
+        "_embedded[companies][0]",
+        "_embedded[companies][0][id]",
+        "_embedded[customers]",
+        "_embedded[customers][0]",
+        "_embedded[customers][0][id]",
+        "_embedded[leads]",
+        "_embedded[leads][0]",
+        "_embedded[leads][0][id]",
+        "_embedded[catalog_elements]",
+        "_embedded[catalog_elements][0]",
+        "_embedded[catalog_elements][0][id]",
+        "_embedded[catalog_elements][0][metadata]",
+        "_embedded[catalog_elements][0][quantity]",
+        "_embedded[catalog_elements][0][catalog_id]",
+        "_embedded[catalog_elements][0][price_id]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен"
+        }
+    ],
+
+    notes: [
+        "Связанные сущности возвращаются в блоке _embedded.",
+        "Для получения покупателей, сделок и элементов списков необходимо использовать параметр with."
+    ],
+
+    relatedMethods: [
+        "get-contact-by-id",
+        "add-contacts",
+        "update-contacts"
+    ]
+},
+
+{
+    id: "get-contact-by-id",
+    entity: "contacts",
+
+    title: "Получение контакта по ID",
+
+    method: "GET",
+    endpoint: "/api/v4/contacts/{id}",
+
+    description: "Метод позволяет получить данные конкретного контакта по ID.",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    requestParams: [
+        "id"
+    ],
+
+    mainRequestParams: [
+        "with"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "first_name",
+        "last_name",
+        "responsible_user_id",
+        "created_at",
+        "updated_at"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "first_name",
+        "last_name",
+        "responsible_user_id",
+        "group_id",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at",
+        "is_deleted",
+        "closest_task_at",
+        "custom_fields_values",
+        "account_id",
+        "_embedded",
+        "_embedded[tags]",
+        "_embedded[tags][0]",
+        "_embedded[tags][0][id]",
+        "_embedded[tags][0][name]",
+        "_embedded[tags][0][color]",
+        "_embedded[companies]",
+        "_embedded[companies][0]",
+        "_embedded[companies][0][id]",
+        "_embedded[customers]",
+        "_embedded[customers][0]",
+        "_embedded[customers][0][id]",
+        "_embedded[leads]",
+        "_embedded[leads][0]",
+        "_embedded[leads][0][id]",
+        "_embedded[catalog_elements]",
+        "_embedded[catalog_elements][0]",
+        "_embedded[catalog_elements][0][id]",
+        "_embedded[catalog_elements][0][metadata]",
+        "_embedded[catalog_elements][0][quantity]",
+        "_embedded[catalog_elements][0][catalog_id]",
+        "_embedded[catalog_elements][0][price_id]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 204,
+            description: "Контакт с указанным ID не существует"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        }
+    ],
+
+    notes: [
+        "Идентификатор контакта передается в URL запроса.",
+        "Для получения связанных сущностей используется параметр with."
+    ],
+
+    relatedMethods: [
+        "get-contacts",
+        "add-contacts",
+        "update-contacts"
+    ]
+},
+
+{
+    id: "add-contacts",
+    entity: "contacts",
+
+    title: "Добавление контактов",
+
+    method: "POST",
+    endpoint: "/api/v4/contacts",
+
+    description: "Метод позволяет добавлять контакты в аккаунт пакетно.",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    mainRequestParams: [
+        "name",
+        "first_name",
+        "last_name",
+        "responsible_user_id",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at",
+        "custom_fields_values",
+        "tags_to_add",
+        "tags_to_add[0]",
+        "tags_to_add[0][id]",
+        "tags_to_add[0][name]",
+        "_embedded",
+        "_embedded[tags]",
+        "_embedded[tags][0]",
+        "_embedded[tags][0][id]",
+        "_embedded[tags][0][name]",
+        "request_id"
+    ],
+
+    responseParams: [
+        "id",
+        "request_id"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Контакты были успешно созданы"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Обязательные поля для данного метода отсутствуют."
+    ],
+
+    relatedMethods: [
+        "get-contacts",
+        "get-contact-by-id",
+        "update-contacts"
+    ]
+},
+    {
+    id: "update-contacts",
+    entity: "contacts",
+
+    title: "Редактирование контактов",
+
+    method: "PATCH",
+    endpoint: "/api/v4/contacts",
+
+    description: "Метод позволяет редактировать контакты пакетно. Также возможно редактирование конкретного контакта через добавление ID в URL запроса (/api/v4/contacts/{id}).",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    mainRequestParams: [
+        "id",
+        "name",
+        "first_name",
+        "last_name",
+        "responsible_user_id",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at",
+        "custom_fields_values",
+        "tags_to_add",
+        "tags_to_add[0]",
+        "tags_to_add[0][id]",
+        "tags_to_add[0][name]",
+        "tags_to_delete",
+        "tags_to_delete[0]",
+        "tags_to_delete[0][id]",
+        "tags_to_delete[0][name]",
+        "_embedded",
+        "_embedded[tags]",
+        "_embedded[tags][0]",
+        "_embedded[tags][0][id]",
+        "_embedded[tags][0][name]"
+    ],
+
+    responseParams: [
+        "id",
+        "updated_at"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Контакты были успешно изменены"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "При редактировании пакетно передается массив из объектов-контактов.",
+        "При редактировании одного контакта передается модель контакта."
+    ],
+
+    relatedMethods: [
+        "get-contacts",
+        "get-contact-by-id",
+        "add-contacts"
+    ]
+},
+
+{
+    id: "link-contact-chats",
+    entity: "contacts",
+
+    title: "Привязка чатов к контактам",
+
+    method: "POST",
+    endpoint: "/api/v4/contacts/chats",
+
+    description: "Метод позволяет привязать чат к контакту.",
+
+    restrictions: [
+        "Метод доступен с правами администратора аккаунта.",
+        "В настройках канала должен быть указан uuid интеграции, которая запрашивает метод.",
+        "Интеграция может менять привязку чатов только по каналам, к которым она имеет доступ.",
+        "Не должны передаваться сессионные куки, иначе метод вернет ошибку."
+    ],
+
+    mainRequestParams: [
+        "chat_id",
+        "contact_id",
+        "request_id"
+    ],
+
+    responseParams: [
+        "id",
+        "contact_id",
+        "chat_id",
+        "request_id"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        }
+    ],
+
+    notes: [
+        "Один чат может быть привязан только к одному контакту.",
+        "Один контакт может быть привязан к нескольким чатам."
+    ],
+
+    relatedMethods: [
+        "get-contact-chats"
+    ]
+},
+
+{
+    id: "get-contact-chats",
+    entity: "contacts",
+
+    title: "Получение списка чатов контакта",
+
+    method: "GET",
+    endpoint: "/api/v4/contacts/chats",
+
+    description: "Метод позволяет получить список чатов, которые относятся к контактам, или список контактов, к которым привязан чат.",
+
+    restrictions: [
+        "Метод доступен с правами администратора аккаунта.",
+        "В настройках канала должен быть указан uuid интеграции, которая запрашивает метод.",
+        "Интеграция может запросить только чаты по каналам, к которым она имеет доступ.",
+        "Не должны передаваться сессионные куки, иначе метод вернет ошибку."
+    ],
+
+    mainRequestParams: [
+        "chat_id",
+        "contact_id"
+    ],
+
+    responseParams: [
+        "id",
+        "contact_id",
+        "chat_id"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы неверные данные в запросе. Подробности в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Метод возвращает коллекцию связей между контактами и чатами.",
+        "Если чат относится к неразобранному, метод вернет ID контакта этого неразобранного."
+    ],
+
+    relatedMethods: [
+        "link-contact-chats"
+    ]
+}
+],
+
+    companies: [
+{
+    id: "get-companies",
+    entity: "companies",
+
+    title: "Получение списка компаний",
+
+    method: "GET",
+    endpoint: "/api/v4/companies",
+
+    description: "Метод позволяет получить список компаний в аккаунте.",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    mainRequestParams: [
+        "with",
+        "page",
+        "limit",
+        "query",
+        "filter",
+        "order"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "responsible_user_id",
+        "created_at",
+        "updated_at"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "responsible_user_id",
+        "group_id",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at",
+        "closest_task_at",
+        "custom_fields_values",
+        "is_deleted",
+        "account_id",
+        "_embedded",
+        "_embedded[tags]",
+        "_embedded[tags][0]",
+        "_embedded[tags][0][id]",
+        "_embedded[tags][0][name]",
+        "_embedded[tags][0][color]",
+        "_embedded[contacts]",
+        "_embedded[contacts][0]",
+        "_embedded[contacts][0][id]",
+        "_embedded[customers]",
+        "_embedded[customers][0]",
+        "_embedded[customers][0][id]",
+        "_embedded[leads]",
+        "_embedded[leads][0]",
+        "_embedded[leads][0][id]",
+        "_embedded[catalog_elements]",
+        "_embedded[catalog_elements][0]",
+        "_embedded[catalog_elements][0][id]",
+        "_embedded[catalog_elements][0][metadata]",
+        "_embedded[catalog_elements][0][quantity]",
+        "_embedded[catalog_elements][0][catalog_id]",
+        "_embedded[catalog_elements][0][price_id]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен"
+        }
+    ],
+
+    notes: [
+        "Связанные сущности возвращаются в блоке _embedded.",
+        "Для получения связанных контактов, покупателей, сделок и элементов списков необходимо использовать параметр with."
+    ],
+
+    relatedMethods: [
+        "get-company-by-id",
+        "add-companies",
+        "update-companies"
+    ]
+},
+
+{
+    id: "get-company-by-id",
+    entity: "companies",
+
+    title: "Получение компании по ID",
+
+    method: "GET",
+    endpoint: "/api/v4/companies/{id}",
+
+    description: "Метод позволяет получить данные конкретной компании по ID.",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    requestParams: [
+        "id"
+    ],
+
+    mainRequestParams: [
+        "with"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "responsible_user_id",
+        "created_at",
+        "updated_at"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "responsible_user_id",
+        "group_id",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at",
+        "closest_task_at",
+        "custom_fields_values",
+        "is_deleted",
+        "account_id",
+        "_embedded",
+        "_embedded[tags]",
+        "_embedded[tags][0]",
+        "_embedded[tags][0][id]",
+        "_embedded[tags][0][name]",
+        "_embedded[tags][0][color]",
+        "_embedded[contacts]",
+        "_embedded[contacts][0]",
+        "_embedded[contacts][0][id]",
+        "_embedded[customers]",
+        "_embedded[customers][0]",
+        "_embedded[customers][0][id]",
+        "_embedded[leads]",
+        "_embedded[leads][0]",
+        "_embedded[leads][0][id]",
+        "_embedded[catalog_elements]",
+        "_embedded[catalog_elements][0]",
+        "_embedded[catalog_elements][0][id]",
+        "_embedded[catalog_elements][0][metadata]",
+        "_embedded[catalog_elements][0][quantity]",
+        "_embedded[catalog_elements][0][catalog_id]",
+        "_embedded[catalog_elements][0][price_id]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 204,
+            description: "Контакт с указанным ID не существует"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        }
+    ],
+
+    notes: [
+        "Идентификатор компании передается в URL запроса.",
+        "Для получения связанных сущностей используется параметр with."
+    ],
+
+    relatedMethods: [
+        "get-companies",
+        "add-companies",
+        "update-companies"
+    ]
+},
+
+{
+    id: "add-companies",
+    entity: "companies",
+
+    title: "Добавление компаний",
+
+    method: "POST",
+    endpoint: "/api/v4/companies",
+
+    description: "Метод позволяет добавлять компании в аккаунт пакетно.",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    mainRequestParams: [
+        "name",
+        "responsible_user_id",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at",
+        "custom_fields_values",
+        "tags_to_add",
+        "tags_to_add[0]",
+        "tags_to_add[0][id]",
+        "tags_to_add[0][name]",
+        "_embedded",
+        "_embedded[tags]",
+        "_embedded[tags][0]",
+        "_embedded[tags][0][id]",
+        "_embedded[tags][0][name]",
+        "request_id"
+    ],
+
+    responseParams: [
+        "id",
+        "request_id"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Компании были успешно созданы"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Обязательных полей для добавления нет."
+    ],
+
+    relatedMethods: [
+        "get-companies",
+        "get-company-by-id",
+        "update-companies"
+    ]
+},
+
+{
+    id: "update-companies",
+    entity: "companies",
+
+    title: "Редактирование компаний",
+
+    method: "PATCH",
+    endpoint: "/api/v4/companies",
+
+    description: "Метод позволяет редактировать компании пакетно. Также возможно редактирование конкретной компании через добавление ID в URL запроса (/api/v4/companies/{id}).",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    mainRequestParams: [
+        "name",
+        "responsible_user_id",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at",
+        "custom_fields_values",
+        "tags_to_add",
+        "tags_to_add[0]",
+        "tags_to_add[0][id]",
+        "tags_to_add[0][name]",
+        "tags_to_delete",
+        "tags_to_delete[0]",
+        "tags_to_delete[0][id]",
+        "tags_to_delete[0][name]",
+        "_embedded",
+        "_embedded[tags]",
+        "_embedded[tags][0]",
+        "_embedded[tags][0][id]",
+        "_embedded[tags][0][name]"
+    ],
+
+    responseParams: [
+        "id",
+        "updated_at"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Компании были успешно изменены"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "При редактировании пакетно передается массив из объектов-компаний.",
+        "При редактировании одной компании передается модель компании."
+    ],
+
+    relatedMethods: [
+        "get-companies",
+        "get-company-by-id",
+        "add-companies"
+    ]
+}
+]
 };

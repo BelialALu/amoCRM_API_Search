@@ -232,6 +232,7 @@ function SearchResults() {
                                         methodsMap={methodsMap}
                                         splitMainParams={false}
                                         showRelatedMethods={true}
+                                        searchQuery={searchQuery}
                                     />
 
 

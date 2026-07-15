@@ -261,3 +261,17 @@
     }
 
 }
+
+.search-highlight{
+
+    background:#ffd54a;
+
+    color:#000;
+
+    padding:0 2px;
+
+    border-radius:4px;
+
+    font-weight:600;
+
+}

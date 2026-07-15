@@ -7,11 +7,39 @@ function MethodInfo({
     methodsMap,
     showRelatedMethods = false,
     splitMainParams = false,
-    showBackButton = false
+    showBackButton = false,
+    searchQuery = ""
 }) {
 
     const getParameter = (parameterId) => {
         return parameters[method.entity]?.[parameterId];
+    };
+
+    const highlightText = (text) => {
+
+        if (!searchQuery.trim()) {
+            return text;
+        }
+
+        const escaped = searchQuery.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+        const parts = String(text).split(
+            new RegExp(`(${escaped})`, "gi")
+        );
+
+        return parts.map((part, index) =>
+
+            part.toLowerCase() === searchQuery.toLowerCase()
+
+                ? (
+                    <mark key={index}>
+                        {part}
+                    </mark>
+                )
+
+                : part
+
+        );
     };
 
     const otherResponseParams =
@@ -37,10 +65,12 @@ function MethodInfo({
 
                     return (
                         <tr key={parameterId}>
-                            <td>{parameter?.name || parameterId}</td>
-                            <td>{parameter?.type || "-"}</td>
+                            <td>{highlightText(parameter?.name || parameterId)}</td>
+                            <td>{highlightText(parameter?.type || "-")}</td>
                             <td>
-                                {parameter?.description || "Описание отсутствует"}
+                                {highlightText(
+                                    parameter?.description || "Описание отсутствует"
+                                )}
                             </td>
                         </tr>
                     );
@@ -68,18 +98,18 @@ function MethodInfo({
                 className="method-info"
             >
 
-                <h2>{method.title}</h2>
+                <h2>{highlightText(method.title)}</h2>
 
                 <div className="method-header-card">
 
                     <div className="method-endpoint">
 
                         <span className="http-method">
-                            {method.method}
+                            {highlightText(method.method)}
                         </span>
 
                         <span>
-                            {method.endpoint}
+                            {highlightText(method.endpoint)}
                         </span>
 
                     </div>
@@ -364,13 +394,13 @@ function MethodInfo({
                                             <>
 
                                                 <p>
-                                                    {relatedMethod.title}
+                                                    {highlightText(relatedMethod.title)}
                                                 </p>
 
                                                 <div className="related-method-endpoint">
                                                     <code>
-                                                        {relatedMethod.method}{" "}
-                                                        {relatedMethod.endpoint}
+                                                        {highlightText(relatedMethod.method)}{" "}
+                                                        {highlightText(relatedMethod.endpoint)}
                                                     </code>
 
                                                 <Link
