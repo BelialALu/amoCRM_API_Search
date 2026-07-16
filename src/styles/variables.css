@@ -35,7 +35,7 @@
    UI SCALE
 ========================================================== */
 
---ui-scale:0.60;
+--ui-scale:0.80;
 
 
 /* ==========================================================
@@ -210,7 +210,7 @@ calc(38px * var(--ui-scale));
 calc(150px * var(--ui-scale));
 
 --search-button-height:
-calc(52px * var(--ui-scale));
+calc(70px * var(--ui-scale));
 
 
 /* ==========================================================
@@ -218,7 +218,7 @@ calc(52px * var(--ui-scale));
 ========================================================== */
 
 --input-height:
-calc(48px * var(--ui-scale));
+calc(65px * var(--ui-scale));
 
 --search-input-height:
 calc(54px * var(--ui-scale));
