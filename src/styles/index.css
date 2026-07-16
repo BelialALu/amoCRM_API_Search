@@ -631,3 +631,26 @@ mark {
     padding: 1px 3px;
     border-radius: 4px;
 }
+
+.contents-link{
+
+    background:none;
+    border:none;
+
+    padding:0;
+
+    color:inherit;
+
+    cursor:pointer;
+
+    font:inherit;
+
+    text-align:left;
+
+}
+
+.contents-link:hover{
+
+    color:var(--color-primary);
+
+}
