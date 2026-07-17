@@ -3757,5 +3757,1621 @@ pipelines:[
         }
     ]
 }
+],
+events:[
+ {
+    id: "get-events",
+    entity: "events",
+    title: "Список событий",
+    method: "GET",
+    endpoint: "/api/v4/events",
+    description: "Метод позволяет получить список событий.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Возвращаемые данные зависят от прав на сущность."
+    ],
+    queryParams: [
+        {
+            name: "with",
+            type: "string",
+            required: false,
+            description: "Дополнительные данные, которые необходимо добавить в ответ."
+        },
+        {
+            name: "page",
+            type: "int",
+            required: false,
+            description: "Страница выборки."
+        },
+        {
+            name: "limit",
+            type: "int",
+            required: false,
+            description: "Количество возвращаемых сущностей за один запрос. Максимум — 100."
+        },
+        {
+            name: "filter[id]",
+            type: "string|array",
+            required: false,
+            description: "Фильтр по ID событий. Можно передать один ID или массив ID."
+        },
+        {
+            name: "filter[created_at]",
+            type: "int|array",
+            required: false,
+            description: "Фильтр по дате создания события. Можно передать timestamp или диапазон from/to."
+        },
+        {
+            name: "filter[created_by]",
+            type: "int|array",
+            required: false,
+            description: "Фильтр по пользователю, создавшему событие. Можно передать до 10 ID пользователей."
+        },
+        {
+            name: "filter[entity]",
+            type: "string|array",
+            required: false,
+            description: "Фильтр по типу сущности. Возможные значения: lead, contact, company, customer, task, catalog_{CATALOG_ID}."
+        },
+        {
+            name: "filter[entity_id]",
+            type: "int|array",
+            required: false,
+            description: "Фильтр по ID сущности. Требует указания filter[entity]. Можно передать до 10 ID."
+        },
+        {
+            name: "filter[type]",
+            type: "string|array",
+            required: false,
+            description: "Фильтр по типу событий."
+        },
+        {
+            name: "filter[value_before]",
+            type: "string|array",
+            required: false,
+            description: "Фильтр по значению до изменения."
+        },
+        {
+            name: "filter[value_after]",
+            type: "string|array",
+            required: false,
+            description: "Фильтр по значению после изменения."
+        }
+    ],
+    requestParams: [],
+    responseParams: [
+        {
+            name: "id",
+            type: "string",
+            description: "ID события."
+        },
+        {
+            name: "type",
+            type: "string",
+            description: "Тип события."
+        },
+        {
+            name: "entity_id",
+            type: "int",
+            description: "ID сущности события."
+        },
+        {
+            name: "entity_type",
+            type: "string",
+            description: "Тип сущности события."
+        },
+        {
+            name: "created_by",
+            type: "int",
+            description: "ID пользователя, создавшего событие."
+        },
+        {
+            name: "created_at",
+            type: "int",
+            description: "Дата создания события в формате Unix Timestamp."
+        },
+        {
+            name: "value_after",
+            type: "array",
+            description: "Массив изменений после события."
+        },
+        {
+            name: "value_before",
+            type: "array",
+            description: "Массив изменений до события."
+        },
+        {
+            name: "account_id",
+            type: "int",
+            description: "ID аккаунта, в котором находится событие."
+        }
+    ],
+    successCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно."
+        }
+    ],
+    errorCodes: [
+        {
+            code: 401,
+            description: "Пользователь не авторизован."
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен."
+        }
+    ]
+},
+{
+    id: "get-event-by-id",
+    entity: "events",
+    title: "Получение события по ID",
+    method: "GET",
+    endpoint: "/api/v4/events/{id}",
+    description: "Метод позволяет получить данные конкретного события по ID.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Возвращаемые данные зависят от прав на сущность."
+    ],
+    queryParams: [
+        {
+            name: "with",
+            type: "string",
+            required: false,
+            description: "Дополнительные данные, которые необходимо добавить в ответ."
+        }
+    ],
+    requestParams: [],
+    responseParams: [
+        {
+            name: "id",
+            type: "string",
+            description: "ID события."
+        },
+        {
+            name: "type",
+            type: "string",
+            description: "Тип события."
+        },
+        {
+            name: "entity_id",
+            type: "int",
+            description: "ID сущности события."
+        },
+        {
+            name: "entity_type",
+            type: "string",
+            description: "Тип сущности события."
+        },
+        {
+            name: "created_by",
+            type: "int",
+            description: "ID пользователя, создавшего событие."
+        },
+        {
+            name: "created_at",
+            type: "int",
+            description: "Дата создания события в формате Unix Timestamp."
+        },
+        {
+            name: "value_after",
+            type: "array",
+            description: "Массив изменений после события."
+        },
+        {
+            name: "value_before",
+            type: "array",
+            description: "Массив изменений до события."
+        },
+        {
+            name: "account_id",
+            type: "int",
+            description: "ID аккаунта, в котором находится событие."
+        }
+    ],
+    successCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно."
+        }
+    ],
+    errorCodes: [
+        {
+            code: 401,
+            description: "Пользователь не авторизован."
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен."
+        }
+    ]
+},
+{
+    id: "get-events-types",
+    entity: "events",
+    title: "Получение типов событий",
+    method: "GET",
+    endpoint: "/api/v4/events/types",
+    description: "Метод позволяет получить все доступные для аккаунта типы событий.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Возвращаемые данные зависят от прав на сущность."
+    ],
+    requestParams: [
+        {
+            name: "language_code",
+            type: "string",
+            description: "Код языка, в котором вернутся названия типов событий. Возможные значения: en, es, ru, pt."
+        }
+    ],
+    responseParams: [
+        {
+            name: "key",
+            type: "string",
+            description: "Код типа события."
+        },
+        {
+            name: "type",
+            type: "int",
+            description: "Идентификатор типа события."
+        },
+        {
+            name: "lang",
+            type: "string",
+            description: "Локализованное название события."
+        }
+    ],
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно."
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован."
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен."
+        }
+    ]
+},
+
+{
+    id: "get-notes",
+    entity: "notes",
+    title: "Список примечаний по типу сущности",
+    method: "GET",
+    endpoint: "/api/v4/{entity_type}/notes",
+    description: "Метод позволяет получить примечания по типу сущности.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Возвращаемые данные зависят от прав на сущность."
+    ],
+    requestParams: [
+        {
+            name: "page",
+            type: "int",
+            description: "Страница выборки."
+        },
+        {
+            name: "limit",
+            type: "int",
+            description: "Количество возвращаемых сущностей за один запрос. Максимум — 250."
+        },
+        {
+            name: "filter[id]",
+            type: "int|array",
+            description: "Фильтр по ID примечаний."
+        },
+        {
+            name: "filter[entity_id]",
+            type: "array",
+            description: "Фильтр по ID сущности."
+        },
+        {
+            name: "filter[note_type]",
+            type: "string|array",
+            description: "Фильтр по типу примечания."
+        },
+        {
+            name: "filter[updated_at]",
+            type: "int|object",
+            description: "Фильтр по дате последнего изменения примечания."
+        },
+        {
+            name: "order",
+            type: "object",
+            description: "Сортировка результатов. Доступные поля: updated_at, id. Значения: asc, desc."
+        },
+        {
+            name: "with",
+            type: "string",
+            description: "Дополнительные параметры ответа. Поддерживается is_pinned."
+        }
+    ],
+    responseParams: [
+        {
+            name: "id",
+            type: "int",
+            description: "ID примечания."
+        },
+        {
+            name: "entity_id",
+            type: "int",
+            description: "ID родительской сущности примечания."
+        },
+        {
+            name: "created_by",
+            type: "int",
+            description: "ID пользователя, создавшего примечание."
+        },
+        {
+            name: "updated_by",
+            type: "int",
+            description: "ID пользователя, изменившего примечание последним."
+        },
+        {
+            name: "created_at",
+            type: "int",
+            description: "Дата создания примечания в Unix Timestamp."
+        },
+        {
+            name: "updated_at",
+            type: "int",
+            description: "Дата изменения примечания в Unix Timestamp."
+        },
+        {
+            name: "responsible_user_id",
+            type: "int",
+            description: "ID пользователя, ответственного за примечание."
+        },
+        {
+            name: "group_id",
+            type: "int",
+            description: "ID группы ответственного пользователя."
+        },
+        {
+            name: "note_type",
+            type: "string",
+            description: "Тип примечания."
+        },
+        {
+            name: "params",
+            type: "object",
+            description: "Свойства примечания, зависят от типа примечания."
+        },
+        {
+            name: "account_id",
+            type: "int",
+            description: "ID аккаунта."
+        },
+        {
+            name: "is_pinned",
+            type: "bool",
+            description: "Закреплено ли примечание. Требуется параметр with=is_pinned."
+        }
+    ],
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно."
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован."
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен."
+        }
+    ]
+},
+
+{
+    id: "get-entity-notes",
+    entity: "notes",
+    title: "Список примечаний по конкретной сущности",
+    method: "GET",
+    endpoint: "/api/v4/{entity_type}/{entity_id}/notes",
+    description: "Метод позволяет получить примечания по ID родительской сущности.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Возвращаемые данные зависят от прав на сущность."
+    ],
+    requestParams: [
+        {
+            name: "page",
+            type: "int",
+            description: "Страница выборки."
+        },
+        {
+            name: "limit",
+            type: "int",
+            description: "Количество возвращаемых сущностей за один запрос. Максимум — 250."
+        },
+        {
+            name: "filter[id]",
+            type: "int|array",
+            description: "Фильтр по ID примечаний."
+        },
+        {
+            name: "filter[note_type]",
+            type: "string|array",
+            description: "Фильтр по типу примечания."
+        },
+        {
+            name: "filter[updated_at]",
+            type: "int|object",
+            description: "Фильтр по дате последнего изменения примечания."
+        },
+        {
+            name: "order",
+            type: "object",
+            description: "Сортировка результатов."
+        },
+        {
+            name: "with",
+            type: "string",
+            description: "Дополнительные параметры ответа. Поддерживается is_pinned."
+        }
+    ],
+    responseParams: [
+        {
+            name: "id",
+            type: "int",
+            description: "ID примечания."
+        },
+        {
+            name: "entity_id",
+            type: "int",
+            description: "ID родительской сущности."
+        },
+        {
+            name: "created_by",
+            type: "int",
+            description: "ID пользователя, создавшего примечание."
+        },
+        {
+            name: "updated_by",
+            type: "int",
+            description: "ID пользователя, изменившего примечание."
+        },
+        {
+            name: "created_at",
+            type: "int",
+            description: "Дата создания в Unix Timestamp."
+        },
+        {
+            name: "updated_at",
+            type: "int",
+            description: "Дата изменения в Unix Timestamp."
+        },
+        {
+            name: "responsible_user_id",
+            type: "int",
+            description: "ID ответственного пользователя."
+        },
+        {
+            name: "group_id",
+            type: "int",
+            description: "ID группы пользователя."
+        },
+        {
+            name: "note_type",
+            type: "string",
+            description: "Тип примечания."
+        },
+        {
+            name: "params",
+            type: "object",
+            description: "Свойства примечания."
+        },
+        {
+            name: "account_id",
+            type: "int",
+            description: "ID аккаунта."
+        },
+        {
+            name: "is_pinned",
+            type: "bool",
+            description: "Закреплено ли примечание."
+        }
+    ],
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно."
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован."
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен."
+        }
+    ]
+},
+
+{
+    id: "get-note-by-id",
+    entity: "notes",
+    title: "Получение примечания по ID",
+    method: "GET",
+    endpoint: [
+        "/api/v4/{entity_type}/notes/{id}",
+        "/api/v4/{entity_type}/{entity_id}/notes/{id}"
+    ],
+    description: "Метод позволяет получить данные конкретного примечания по ID.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Возвращаемые данные зависят от прав на сущность."
+    ],
+    requestParams: [
+        {
+            name: "with",
+            type: "string",
+            description: "Дополнительные параметры ответа. Поддерживается is_pinned."
+        }
+    ],
+    responseParams: [
+        {
+            name: "id",
+            type: "int",
+            description: "ID примечания."
+        },
+        {
+            name: "entity_id",
+            type: "int",
+            description: "ID родительской сущности."
+        },
+        {
+            name: "created_by",
+            type: "int",
+            description: "ID пользователя, создавшего примечание."
+        },
+        {
+            name: "updated_by",
+            type: "int",
+            description: "ID пользователя, изменившего примечание."
+        },
+        {
+            name: "created_at",
+            type: "int",
+            description: "Дата создания в Unix Timestamp."
+        },
+        {
+            name: "updated_at",
+            type: "int",
+            description: "Дата изменения в Unix Timestamp."
+        },
+        {
+            name: "responsible_user_id",
+            type: "int",
+            description: "ID пользователя, ответственного за примечание."
+        },
+        {
+            name: "group_id",
+            type: "int",
+            description: "ID группы."
+        },
+        {
+            name: "note_type",
+            type: "string",
+            description: "Тип примечания."
+        },
+        {
+            name: "params",
+            type: "object",
+            description: "Свойства примечания."
+        },
+        {
+            name: "account_id",
+            type: "int",
+            description: "ID аккаунта."
+        },
+        {
+            name: "is_pinned",
+            type: "bool",
+            description: "Закреплено ли примечание."
+        }
+    ],
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно."
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован."
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен."
+        }
+    ]
+},
+{
+    id: "create-notes",
+    entity: "notes",
+    title: "Добавление примечаний",
+    method: "POST",
+    endpoint: [
+        "/api/v4/{entity_type}/notes",
+        "/api/v4/{entity_type}/{entity_id}/notes"
+    ],
+    description: "Метод позволяет добавлять примечания в аккаунт пакетно.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Успешность выполнения действия зависит от прав на сущность."
+    ],
+    requestParams: [
+        {
+            name: "entity_id",
+            type: "int",
+            description: "ID сущности, в которую добавляется примечание. Обязателен при использовании метода /api/v4/{entity_type}/notes."
+        },
+        {
+            name: "created_by",
+            type: "int",
+            description: "ID пользователя, от имени которого добавляется примечание."
+        },
+        {
+            name: "note_type",
+            type: "string",
+            description: "Тип примечания."
+        },
+        {
+            name: "responsible_user_id",
+            type: "int",
+            description: "ID пользователя, ответственного за примечание. Необязательный параметр."
+        },
+        {
+            name: "params",
+            type: "object",
+            description: "Свойства примечания, зависят от типа примечания."
+        },
+        {
+            name: "request_id",
+            type: "string",
+            description: "Поле, которое возвращается в ответе без изменений и не сохраняется."
+        },
+        {
+            name: "is_need_to_trigger_digital_pipeline",
+            type: "bool",
+            description: "Нужно ли отправлять события в Digital Pipeline. По умолчанию true."
+        }
+    ],
+    responseParams: [
+        {
+            name: "id",
+            type: "int",
+            description: "ID созданного примечания."
+        },
+        {
+            name: "entity_id",
+            type: "int",
+            description: "ID сущности, в которую было добавлено примечание."
+        },
+        {
+            name: "request_id",
+            type: "string",
+            description: "Строка, переданная при запросе, или порядковый указатель."
+        }
+    ],
+    responseCodes: [
+        {
+            code: 200,
+            description: "Примечания были успешно созданы."
+        },
+        {
+            code: 403,
+            description: "Не хватает прав для вызова данного метода."
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован."
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные."
+        }
+    ]
+},
+
+{
+    id: "update-notes",
+    entity: "notes",
+    title: "Редактирование примечаний",
+    method: "PATCH",
+    endpoint: [
+        "/api/v4/{entity_type}/notes",
+        "/api/v4/{entity_type}/{entity_id}/notes",
+        "/api/v4/{entity_type}/{entity_id}/notes/{id}"
+    ],
+    description: "Метод позволяет редактировать примечания пакетно или изменять конкретное примечание по ID.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Успешность выполнения действия зависит от прав на сущность."
+    ],
+    requestParams: [
+        {
+            name: "id",
+            type: "int",
+            description: "ID примечания. Используется при редактировании конкретного примечания."
+        },
+        {
+            name: "entity_id",
+            type: "int",
+            description: "ID сущности, к которой относится примечание."
+        },
+        {
+            name: "note_type",
+            type: "string",
+            description: "Тип примечания."
+        },
+        {
+            name: "params",
+            type: "object",
+            description: "Свойства примечания, зависят от типа примечания."
+        }
+    ],
+    responseParams: [
+        {
+            name: "id",
+            type: "int",
+            description: "ID измененного примечания."
+        },
+        {
+            name: "entity_id",
+            type: "int",
+            description: "ID сущности примечания."
+        },
+        {
+            name: "request_id",
+            type: "string",
+            description: "Идентификатор запроса."
+        }
+    ],
+    responseCodes: [
+        {
+            code: 200,
+            description: "Списки были успешно изменены."
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован."
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные."
+        }
+    ]
+},
+
+{
+    id: "pin-note",
+    entity: "notes",
+    title: "Закрепление примечания",
+    method: "POST",
+    endpoint: "/api/v4/{entity_type}/notes/{id}/pin",
+    description: "Метод позволяет закрепить примечание по ID примечания.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Успешность выполнения действия зависит от прав на сущность."
+    ],
+    requestParams: [],
+    responseParams: [],
+    responseCodes: [
+        {
+            code: 204,
+            description: "Примечание было успешно закреплено."
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные."
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован."
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен."
+        },
+        {
+            code: 403,
+            description: "Не хватает прав для вызова данного метода."
+        },
+        {
+            code: 404,
+            description: "Примечание не найдено."
+        }
+    ]
+},
+
+{
+    id: "unpin-note",
+    entity: "notes",
+    title: "Открепление примечания",
+    method: "POST",
+    endpoint: "/api/v4/{entity_type}/notes/{id}/unpin",
+    description: "Метод позволяет открепить примечание по ID примечания.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Успешность выполнения действия зависит от прав на сущность."
+    ],
+    requestParams: [],
+    responseParams: [],
+    responseCodes: [
+        {
+            code: 204,
+            description: "Примечание было успешно откреплено."
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные."
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован."
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен."
+        },
+        {
+            code: 403,
+            description: "Не хватает прав для вызова данного метода."
+        },
+        {
+            code: 404,
+            description: "Примечание не найдено."
+        }
+    ]
+}
+],
+
+fields:[
+{
+    id: "get-custom-fields",
+    entity: "fields",
+    title: "Список полей сущности",
+    method: "GET",
+    endpoint: [
+        "/api/v4/leads/custom_fields",
+        "/api/v4/contacts/custom_fields",
+        "/api/v4/companies/custom_fields",
+        "/api/v4/customers/custom_fields",
+        "/api/v4/customers/segments/custom_fields",
+        "/api/v4/catalogs/{catalog_id}/custom_fields"
+    ],
+    description: "Метод позволяет получить список полей сущности в аккаунте.",
+    restrictions: [
+        "Метод возвращает до 50 полей за один запрос.",
+        "Метод доступен всем пользователям аккаунта."
+    ],
+    requestParams: [
+        "page",
+        "limit",
+        "filter[type][0]",
+        "order"
+    ],
+    responseParams: [
+        "id",
+        "name",
+        "code",
+        "sort",
+        "type",
+        "entity_type",
+        "is_computed",
+        "is_predefined",
+        "is_deletable",
+        "is_visible",
+        "is_required",
+        "settings",
+        "remind",
+        "currency",
+        "enums",
+        "nested",
+        "is_api_only",
+        "group_id",
+        "required_statuses",
+        "hidden_statuses",
+        "chained_lists",
+        "tracking_callback",
+        "search_in"
+    ],
+    responseCodes: [
+        "200 - Запрос выполнен успешно",
+        "422 - Запрос не может быть обработан",
+        "401 - Пользователь не авторизован",
+        "400 - Переданы некорректные данные"
+    ]
+},
+{
+    id: "get-custom-field",
+    entity: "fields",
+    title: "Получение поля сущности по ID",
+    method: "GET",
+    endpoint: [
+        "/api/v4/leads/custom_fields/{id}",
+        "/api/v4/contacts/custom_fields/{id}",
+        "/api/v4/companies/custom_fields/{id}",
+        "/api/v4/customers/custom_fields/{id}",
+        "/api/v4/customers/segments/custom_fields/{id}",
+        "/api/v4/catalogs/{catalog_id}/custom_fields/{id}"
+    ],
+    description: "Метод позволяет получить поле сущности по его ID.",
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта."
+    ],
+    requestParams: [],
+    responseParams: [
+        "id",
+        "name",
+        "code",
+        "sort",
+        "type",
+        "entity_type",
+        "is_predefined",
+        "is_deletable",
+        "is_visible",
+        "is_required",
+        "settings",
+        "remind",
+        "enums",
+        "is_api_only",
+        "group_id",
+        "required_statuses",
+        "nested",
+        "hidden_statuses",
+        "chained_lists",
+        "tracking_callback",
+        "search_in",
+        "currency"
+    ],
+    responseCodes: [
+        "200 - Запрос выполнен успешно",
+        "422 - Запрос не может быть обработан",
+        "401 - Пользователь не авторизован"
+    ]
+},
+{
+    id: "add-custom-fields",
+
+    entity: "fields",
+
+    title: "Создание дополнительных полей сущности",
+
+    method: "POST",
+    endpoint: "/api/v4/{entity}/custom_fields",
+
+    description: "Метод позволяет создавать поля сущности пакетно.",
+
+    restrictions: [
+        "Метод доступен только администраторам аккаунта."
+    ],
+
+    mainRequestParams: [
+        "type",
+        "name",
+        "code",
+        "sort",
+        "group_id",
+        "is_api_only",
+        "required_statuses",
+        "settings",
+        "is_visible",
+        "is_required",
+        "remind",
+        "enums",
+        "nested",
+        "tracking_callback",
+        "hidden_statuses",
+        "chained_lists",
+        "search_in",
+        "currency"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "type",
+        "sort",
+        "settings",
+        "is_api_only"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "type",
+        "sort",
+        "settings",
+        "is_predefined",
+        "remind",
+        "is_api_only",
+        "enums",
+        "enums[0]",
+        "enums[0][id]",
+        "enums[0][value]",
+        "enums[0][sort]",
+        "group_id",
+        "required_statuses",
+        "required_statuses[0]",
+        "required_statuses[0][status_id]",
+        "required_statuses[0][pipeline_id]",
+        "nested",
+        "nested[0]",
+        "nested[0][id]",
+        "nested[0][parent_id]",
+        "nested[0][value]",
+        "nested[0][sort]",
+        "code",
+        "is_visible",
+        "is_required",
+        "currency",
+        "search_in",
+        "chained_lists",
+        "_links",
+        "_links[self]",
+        "_links[self][href]"
+    ],
+
+    responseCodes: [
+        {
+            code: 201,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 422,
+            description: "Запрос не может быть обработан, подробности в теле ответа"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Создание дополнительных полей выполняется пакетно.",
+        "В запросе передается массив моделей создаваемых полей.",
+        "Для некоторых типов полей требуется передача дополнительных параметров enums или nested."
+    ],
+
+    relatedMethods: [
+        "update-custom-fields",
+        "delete-custom-fields"
+    ]
+},
+
+
+{
+    id: "update-custom-fields",
+
+    entity: "fields",
+
+    title: "Редактирование дополнительных полей сущности",
+
+    method: "PATCH",
+    endpoint: "/api/v4/{entity}/custom_fields",
+
+    description: "Метод позволяет редактировать дополнительные поля сущности пакетно.",
+
+    restrictions: [
+        "Метод доступен только администраторам аккаунта."
+    ],
+
+    mainRequestParams: [
+        "id",
+        "name",
+        "code",
+        "sort",
+        "group_id",
+        "is_api_only",
+        "required_statuses",
+        "settings",
+        "is_visible",
+        "is_required",
+        "remind",
+        "enums",
+        "nested",
+        "tracking_callback",
+        "hidden_statuses",
+        "chained_lists",
+        "search_in",
+        "currency"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "type",
+        "sort",
+        "settings",
+        "is_api_only"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "type",
+        "sort",
+        "settings",
+        "is_predefined",
+        "remind",
+        "is_api_only",
+        "enums",
+        "enums[0]",
+        "enums[0][id]",
+        "enums[0][value]",
+        "enums[0][sort]",
+        "group_id",
+        "required_statuses",
+        "nested",
+        "nested[0]",
+        "nested[0][id]",
+        "nested[0][parent_id]",
+        "nested[0][value]",
+        "nested[0][sort]",
+        "is_visible",
+        "is_required",
+        "_links",
+        "_links[self]",
+        "_links[self][href]"
+    ],
+
+    responseCodes: [
+        {
+            code: 201,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 422,
+            description: "Запрос не может быть обработан, подробности в теле ответа"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "При редактировании пакетно передается массив объектов.",
+        "Для редактирования одного поля можно указать ID в endpoint."
+    ],
+
+    relatedMethods: [
+        "add-custom-fields",
+        "delete-custom-fields"
+    ]
+},
+
+
+{
+    id: "delete-custom-fields",
+
+    entity: "fields",
+
+    title: "Удаление дополнительного поля сущности",
+
+    method: "DELETE",
+    endpoint: "/api/v4/{entity}/custom_fields/{id}",
+
+    description: "Метод позволяет удалить дополнительное поле у сущности в аккаунте.",
+
+    restrictions: [
+        "Метод доступен только с правами администратора аккаунта.",
+        "Значения удаленного поля будут удалены."
+    ],
+
+    mainRequestParams: [
+        "id"
+    ],
+
+    mainResponseParams: [],
+
+    responseParams: [],
+
+    responseCodes: [
+        {
+            code: 204,
+            description: "Поле было успешно удалено"
+        },
+        {
+            code: 403,
+            description: "Не хватает прав для вызова данного метода"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Метод не возвращает тело ответа."
+    ],
+
+    relatedMethods: [
+        "add-custom-fields",
+        "update-custom-fields"
+    ]
+},
+{
+    id: "get-fields-groups",
+    entity: "fields",
+
+    title: "Список групп полей сущности",
+
+    method: "GET",
+    endpoint: "/api/v4/{entity_type}/custom_fields/groups",
+
+    description: "Метод позволяет получить список групп полей сущности в аккаунте.",
+
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта."
+    ],
+
+    mainRequestParams: [],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "sort",
+        "entity_type",
+        "is_predefined",
+        "type"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "sort",
+        "entity_type",
+        "is_predefined",
+        "type",
+        "_links",
+        "_links[self]",
+        "_links[self][href]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Метод возвращает коллекцию групп дополнительных полей.",
+        "Поддерживаемые сущности: leads, contacts, companies, customers."
+    ],
+
+    relatedMethods: [
+        "get-fields-group-by-id",
+        "add-fields-groups"
+    ]
+},
+{
+    id: "get-fields-group-by-id",
+    entity: "fields",
+
+    title: "Получение группы полей сущности по ID группы",
+
+    method: "GET",
+    endpoint: "/api/v4/{entity_type}/custom_fields/groups/{id}",
+
+    description: "Метод позволяет получить группу полей сущности в аккаунте.",
+
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта."
+    ],
+
+    mainRequestParams: [
+        "id"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "sort",
+        "entity_type",
+        "is_predefined",
+        "type"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "sort",
+        "entity_type",
+        "is_predefined",
+        "type",
+        "_links",
+        "_links[self]",
+        "_links[self][href]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 404,
+            description: "Группа полей не найдена"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        }
+    ],
+
+    notes: [
+        "Метод возвращает модель группы дополнительных полей."
+    ],
+
+    relatedMethods: [
+        "get-fields-groups",
+        "add-fields-groups"
+    ]
+},
+{
+    id: "add-fields-groups",
+    entity: "fields",
+
+    title: "Создание групп полей",
+
+    method: "POST",
+    endpoint: "/api/v4/{entity_type}/custom_fields/groups",
+
+    description: "Метод позволяет добавлять группы полей сущности в аккаунт пакетно.",
+
+    restrictions: [
+        "Метод доступен только с правами администратора аккаунта."
+    ],
+
+    mainRequestParams: [
+        "name",
+        "sort",
+        "request_id"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "sort",
+        "entity_type",
+        "is_predefined",
+        "type"
+    ],
+
+    responseParams: [
+        "_total_items",
+        "_embedded",
+        "_embedded[custom_field_groups]",
+        "_embedded[custom_field_groups][0]",
+        "_embedded[custom_field_groups][0][id]",
+        "_embedded[custom_field_groups][0][name]",
+        "_embedded[custom_field_groups][0][sort]",
+        "_embedded[custom_field_groups][0][entity_type]",
+        "_embedded[custom_field_groups][0][is_predefined]",
+        "_embedded[custom_field_groups][0][type]",
+        "_embedded[custom_field_groups][0][_links]",
+        "_embedded[custom_field_groups][0][_links][self]",
+        "_embedded[custom_field_groups][0][_links][self][href]"
+    ],
+
+    responseCodes: [
+        {
+            code: 201,
+            description: "Группы полей были успешно созданы"
+        },
+        {
+            code: 403,
+            description: "Не хватает прав для вызова данного метода"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Группы полей создаются пакетно.",
+        "Параметр request_id возвращается в ответе без изменений и не сохраняется."
+    ],
+
+    relatedMethods: [
+        "get-fields-groups",
+        "get-fields-group-by-id"
+    ]
+},
+{
+    id: "update-fields-group",
+    entity: "fields",
+
+    title: "Редактирование группы полей",
+
+    method: "PATCH",
+    endpoint: "/api/v4/{entity_type}/custom_fields/groups/{id}",
+
+    description: "Метод позволяет изменять группу полей в аккаунте по ID группы.",
+
+    restrictions: [
+        "Метод доступен только с правами администратора аккаунта."
+    ],
+
+    mainRequestParams: [
+        "name",
+        "sort",
+        "fields"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "sort",
+        "entity_type",
+        "is_predefined",
+        "type",
+        "fields"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "sort",
+        "entity_type",
+        "is_predefined",
+        "type",
+        "fields",
+        "_links",
+        "_links[self]",
+        "_links[self][href]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Группа полей была успешно изменена"
+        },
+        {
+            code: 403,
+            description: "Не хватает прав для вызова данного метода"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Для изменения группы необходимо передать хотя бы один параметр.",
+        "Параметр fields содержит массив ID полей, которые должны быть перенесены в группу."
+    ],
+
+    relatedMethods: [
+        "get-fields-groups",
+        "get-fields-group-by-id",
+        "delete-fields-group"
+    ]
+},
+{
+    id: "delete-fields-group",
+    entity: "fields",
+
+    title: "Удаление группы дополнительных полей",
+
+    method: "DELETE",
+    endpoint: "/api/v4/{entity_type}/custom_fields/groups/{id}",
+
+    description: "Метод позволяет удалить группу полей у сущности в аккаунте.",
+
+    restrictions: [
+        "Метод доступен только с правами администратора аккаунта.",
+        "Предустановленные группы недоступны для удаления."
+    ],
+
+    mainRequestParams: [
+        "id"
+    ],
+
+    mainResponseParams: [],
+
+    responseParams: [],
+
+    responseCodes: [
+        {
+            code: 204,
+            description: "Группа полей была успешно удалена"
+        },
+        {
+            code: 404,
+            description: "Группа полей не найдена"
+        },
+        {
+            code: 403,
+            description: "Не хватает прав для вызова данного метода"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Метод не возвращает тело ответа."
+    ],
+
+    relatedMethods: [
+        "get-fields-groups",
+        "get-fields-group-by-id",
+        "update-fields-group"
+    ]
+}
+],
+
+tags:[
+
+],
+
+links:[
+
+],
+
+catalogs:[
+
+],
+
+account:[
+
+],
+
+unsorted:[
+
+],
+
+conversations:[
+
+],
+
+"entity-followers":[
+
 ]
 };
