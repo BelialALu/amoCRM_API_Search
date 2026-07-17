@@ -5348,30 +5348,669 @@ fields:[
 ],
 
 tags:[
+{
+    id: "get-tags",
+    entity: "tags",
 
-],
+    title: "Список тегов для сущности",
 
-links:[
+    method: "GET",
+    endpoint: "/api/v4/{entity_type}/tags",
 
-],
+    description: "Метод позволяет получить список тегов для сущности в аккаунте.",
 
-catalogs:[
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
 
+    mainRequestParams: [
+        "page",
+        "limit",
+        "filter",
+        "query"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "color"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "color"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 204,
+            description: "Данных не найдено"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        }
+    ],
+
+    notes: [
+        "Метод позволяет получить теги для сделок, контактов, компаний и покупателей.",
+        "Для фильтрации по ID можно передать один ID или массив ID через filter[id].",
+        "Максимальное количество возвращаемых тегов за один запрос — 250."
+    ],
+
+    relatedMethods: [
+        "add-tags",
+        "add-tags-to-entity",
+        "remove-tags-from-entity"
+    ]
+},
+
+{
+    id: "add-tags",
+    entity: "tags",
+
+    title: "Добавление тегов для конкретного типа сущности",
+
+    method: "POST",
+    endpoint: "/api/v4/{entity_type}/tags",
+
+    description: "Метод позволяет добавлять теги для указанной в URL сущности пакетно.",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    mainRequestParams: [
+        "name",
+        "color",
+        "request_id"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "color",
+        "request_id"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "color",
+        "request_id"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Теги были успешно созданы"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Если тег с переданным названием уже существует, в ответе возвращается его ID.",
+        "Параметр color доступен для тегов сделок.",
+        "Параметр request_id возвращается без изменений и не сохраняется."
+    ],
+
+    relatedMethods: [
+        "get-tags",
+        "add-tags-to-entity"
+    ]
+},
+
+{
+    id: "add-tags-to-entity",
+    entity: "tags",
+
+    title: "Добавление тегов к сущности",
+
+    method: "PATCH",
+    endpoint: "/api/v4/{entity_type}",
+
+    description: "Метод позволяет добавлять теги к сущности пакетно.",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    mainRequestParams: [
+        "_embedded[tags]",
+        "_embedded[tags][0]",
+        "_embedded[tags][0][id]",
+        "_embedded[tags][0][name]"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "_embedded",
+        "_embedded[tags]"
+    ],
+
+    responseParams: [
+        "id",
+        "_embedded",
+        "_embedded[tags]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Сущности были успешно изменены"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "При обновлении необходимо передать все теги сущности.",
+        "Если существующие теги не передать, они будут откреплены.",
+        "Для добавления тега необходимо указать его id или name."
+    ],
+
+    relatedMethods: [
+        "get-tags",
+        "remove-tags-from-entity"
+    ]
+},
+
+{
+    id: "remove-tags-from-entity",
+    entity: "tags",
+
+    title: "Удаление тегов у сущности",
+
+    method: "PATCH",
+    endpoint: "/api/v4/{entity_type}",
+
+    description: "Метод позволяет удалить все теги у сущности.",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя."
+    ],
+
+    mainRequestParams: [
+        "_embedded[tags]"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "_embedded",
+        "_embedded[tags]"
+    ],
+
+    responseParams: [
+        "id",
+        "_embedded",
+        "_embedded[tags]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Сущности были успешно изменены"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 400,
+            description: "Переданы некорректные данные. Подробности доступны в теле ответа"
+        }
+    ],
+
+    notes: [
+        "Для удаления тегов необходимо передать _embedded[tags] со значением null.",
+        "Метод удаляет все связанные теги у указанной сущности."
+    ],
+
+    relatedMethods: [
+        "get-tags",
+        "add-tags-to-entity"
+    ]
+}
 ],
 
 account:[
+{
+    id: "get-account",
+    entity: "account",
 
-],
+    title: "Параметры аккаунта",
 
-unsorted:[
+    method: "GET",
+    endpoint: "/api/v4/account",
 
+    description: "Метод позволяет получить необходимую информацию по аккаунту, например: ID, название, справочник типов задач, группы пользователей и другие параметры.",
+
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта."
+    ],
+
+    mainRequestParams: [
+        "with"
+    ],
+
+    mainResponseParams: [
+        "id",
+        "name",
+        "subdomain",
+        "current_user_id",
+        "country",
+        "customers_mode",
+        "is_unsorted_on",
+        "is_loss_reason_enabled",
+        "is_helpbot_enabled",
+        "is_technical_account"
+    ],
+
+    responseParams: [
+        "id",
+        "name",
+        "subdomain",
+        "current_user_id",
+        "country",
+        "customers_mode",
+        "is_unsorted_on",
+        "is_loss_reason_enabled",
+        "is_helpbot_enabled",
+        "is_technical_account",
+        "contact_name_display_order",
+        "amojo_id",
+        "version",
+        "drive_url",
+        "is_api_filter_enabled",
+        "entity_names",
+        "invoices_settings",
+        "invoices_settings[lang]",
+        "invoices_settings[invoices_catalog_id]",
+        "_embedded",
+        "_embedded[amojo_rights]",
+        "_embedded[amojo_rights][can_direct]",
+        "_embedded[amojo_rights][can_create_groups]",
+        "_embedded[users_groups]",
+        "_embedded[users_groups][0]",
+        "_embedded[users_groups][0][id]",
+        "_embedded[users_groups][0][name]",
+        "_embedded[task_types]",
+        "_embedded[task_types][0]",
+        "_embedded[task_types][0][id]",
+        "_embedded[task_types][0][name]",
+        "_embedded[task_types][0][color]",
+        "_embedded[task_types][0][icon_id]",
+        "_embedded[task_types][0][code]",
+        "_embedded[datetime_settings]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        }
+    ],
+
+    notes: [
+        "Дополнительные данные аккаунта доступны через GET параметр with.",
+        "Параметр with может принимать несколько значений, указанных через запятую.",
+        "Данные групп пользователей, типов задач и настроек чатов возвращаются в блоке _embedded."
+    ],
+
+    relatedMethods: []
+}
 ],
 
 conversations:[
+{
+    id: "get-talks",
+    entity: "conversations",
 
+    title: "Список бесед",
+
+    method: "GET",
+    endpoint: "/api/v4/talks",
+
+    description: "Метод позволяет получить список бесед в аккаунте.",
+
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Возвращаемые данные зависят от прав на контакт, к которому принадлежит беседа."
+    ],
+
+    mainRequestParams: [
+        "page",
+        "limit",
+        "filter",
+        "filter[talk_id]",
+        "filter[contact_id]",
+        "filter[entity_id]",
+        "filter[entity_type]",
+        "filter[only_in_work]"
+    ],
+
+    mainResponseParams: [
+        "talk_id",
+        "created_at",
+        "updated_at",
+        "contact_id",
+        "chat_id",
+        "entity_id",
+        "entity_type",
+        "status",
+        "is_in_work",
+        "is_read",
+        "origin",
+        "source_id",
+        "account_id"
+    ],
+
+    responseParams: [
+        "talk_id",
+        "created_at",
+        "updated_at",
+        "rate",
+        "contact_id",
+        "chat_id",
+        "entity_id",
+        "entity_type",
+        "status",
+        "is_in_work",
+        "is_read",
+        "origin",
+        "source_id",
+        "account_id",
+        "_embedded",
+        "_embedded[contacts]",
+        "_embedded[contacts][0]",
+        "_embedded[contacts][0][id]",
+        "_embedded[leads]",
+        "_embedded[leads][0]",
+        "_embedded[leads][0][id]",
+        "_embedded[customers]",
+        "_embedded[customers][0]",
+        "_embedded[customers][0][id]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 204,
+            description: "Беседы не найдены"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен"
+        }
+    ],
+
+    notes: [
+        "Максимальное количество возвращаемых бесед за один запрос — 250.",
+        "Фильтр filter[entity_id] необходимо использовать вместе с filter[entity_type].",
+        "Параметр filter[only_in_work] позволяет получить только открытые беседы."
+    ],
+
+    relatedMethods: [
+        "get-talk-by-id",
+        "close-talk"
+    ]
+},
+
+{
+    id: "get-talk-by-id",
+    entity: "conversations",
+
+    title: "Получение беседы по ID",
+
+    method: "GET",
+    endpoint: "/api/v4/talks/{id}",
+
+    description: "Метод позволяет получить данные конкретной беседы по ID.",
+
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Возвращаемые данные зависят от прав на контакт, к которому принадлежит беседа."
+    ],
+
+    mainRequestParams: [
+        "id"
+    ],
+
+    mainResponseParams: [
+        "talk_id",
+        "created_at",
+        "updated_at",
+        "contact_id",
+        "chat_id",
+        "entity_id",
+        "entity_type",
+        "status",
+        "is_in_work",
+        "is_read",
+        "origin",
+        "source_id",
+        "account_id"
+    ],
+
+    responseParams: [
+        "talk_id",
+        "created_at",
+        "updated_at",
+        "rate",
+        "contact_id",
+        "chat_id",
+        "entity_id",
+        "entity_type",
+        "status",
+        "is_in_work",
+        "is_read",
+        "origin",
+        "source_id",
+        "account_id",
+        "_embedded",
+        "_embedded[contacts]",
+        "_embedded[contacts][0]",
+        "_embedded[contacts][0][id]",
+        "_embedded[leads]",
+        "_embedded[leads][0]",
+        "_embedded[leads][0][id]",
+        "_embedded[customers]",
+        "_embedded[customers][0]",
+        "_embedded[customers][0][id]"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен"
+        },
+        {
+            code: 403,
+            description: "Недостаточно прав"
+        },
+        {
+            code: 404,
+            description: "Беседа не найдена"
+        }
+    ],
+
+    notes: [
+        "Метод возвращает данные одной беседы по указанному идентификатору.",
+        "Связанные сущности возвращаются в блоке _embedded."
+    ],
+
+    relatedMethods: [
+        "get-talks",
+        "close-talk"
+    ]
+},
+
+{
+    id: "close-talk",
+    entity: "conversations",
+
+    title: "Закрытие беседы по ID",
+
+    method: "POST",
+    endpoint: "/api/v4/talks/{id}/close",
+
+    description: "Метод позволяет запустить NPS-бота или закрыть беседу по ID.",
+
+    restrictions: [
+        "Метод доступен в соответствии с правами пользователя на контакт, к которому принадлежит беседа.",
+        "NPS-бот будет запущен только если он включен в настройках аккаунта, доступен в тарифном плане и не передан параметр force_close."
+    ],
+
+    mainRequestParams: [
+        "force_close"
+    ],
+
+    mainResponseParams: [],
+
+    responseParams: [],
+
+    responseCodes: [
+        {
+            code: 202,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен"
+        },
+        {
+            code: 403,
+            description: "Недостаточно прав"
+        },
+        {
+            code: 404,
+            description: "Беседа не найдена"
+        },
+        {
+            code: 422,
+            description: "Беседа уже закрыта или находится в процессе закрытия"
+        }
+    ],
+
+    notes: [
+        "Для принудительного закрытия беседы необходимо передать force_close со значением true.",
+        "Метод не возвращает тело ответа."
+    ],
+
+    relatedMethods: [
+        "get-talks",
+        "get-talk-by-id"
+    ]
+}
 ],
 
 "entity-followers":[
+{
+    id: "get-entity-followers",
+    entity: "entity-followers",
 
+    title: "Список подписчиков сущности",
+
+    method: "GET",
+    endpoint: "/api/v4/{entity_type}/{id}/subscriptions",
+
+    description: "Метод позволяет получить подписчиков конкретной сущности.",
+
+    restrictions: [
+        "Метод доступен всем пользователям аккаунта.",
+        "Возвращаемые данные зависят от прав на сущность."
+    ],
+
+    mainRequestParams: [
+        "page",
+        "limit"
+    ],
+
+    mainResponseParams: [
+        "subscriber_id",
+        "type"
+    ],
+
+    responseParams: [
+        "subscriber_id",
+        "type"
+    ],
+
+    responseCodes: [
+        {
+            code: 200,
+            description: "Запрос выполнен успешно"
+        },
+        {
+            code: 204,
+            description: "Данных не найдено"
+        },
+        {
+            code: 401,
+            description: "Пользователь не авторизован"
+        },
+        {
+            code: 402,
+            description: "Аккаунт не оплачен"
+        },
+        {
+            code: 403,
+            description: "Недостаточно прав"
+        },
+        {
+            code: 404,
+            description: "Сущность не найдена"
+        }
+    ],
+
+    notes: [
+        "Метод позволяет получить подписчиков сделок и покупателей.",
+        "Максимальное количество возвращаемых подписчиков за один запрос — 250.",
+        "Тип подписчика может принимать значения user или group."
+    ],
+
+    relatedMethods: []
+}
 ]
 };
