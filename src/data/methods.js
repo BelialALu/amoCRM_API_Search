@@ -3209,73 +3209,22 @@ pipelines:[
         "Content-Type": "application/json"
     },
     requestParams: [
-        {
-            name: "name",
-            type: "string",
-            description: "Название воронки.",
-            required: false
-        },
-        {
-            name: "sort",
-            type: "int",
-            description: "Сортировка воронки.",
-            required: false
-        },
-        {
-            name: "is_main",
-            type: "bool",
-            description: "Является ли воронка главной.",
-            required: false
-        },
-        {
-            name: "is_unsorted_on",
-            type: "bool",
-            description: "Включено ли неразобранное в воронке.",
-            required: false
-        }
-    ],
-    responseParams: [
-        {
-            name: "id",
-            type: "int",
-            description: "ID воронки."
-        },
-        {
-            name: "name",
-            type: "string",
-            description: "Название воронки."
-        },
-        {
-            name: "sort",
-            type: "int",
-            description: "Сортировка воронки."
-        },
-        {
-            name: "is_main",
-            type: "bool",
-            description: "Является ли воронка главной."
-        },
-        {
-            name: "is_unsorted_on",
-            type: "bool",
-            description: "Включено ли неразобранное в воронке."
-        },
-        {
-            name: "is_archive",
-            type: "bool",
-            description: "Является ли воронка архивной."
-        },
-        {
-            name: "account_id",
-            type: "int",
-            description: "ID аккаунта, в котором находится воронка."
-        },
-        {
-            name: "_embedded.statuses",
-            type: "array",
-            description: "Массив статусов, находящихся в воронке."
-        }
-    ],
+    "name",
+    "sort",
+    "is_main",
+    "is_unsorted_on"
+],
+
+responseParams: [
+    "id",
+    "name",
+    "sort",
+    "is_main",
+    "is_unsorted_on",
+    "is_archive",
+    "account_id",
+    "_embedded.statuses"
+],
     successCodes: [
         {
             code: 200,
@@ -3346,60 +3295,20 @@ pipelines:[
         "Метод доступен всем пользователям аккаунта."
     ],
     requestParams: [
-        {
-            name: "with",
-            type: "string",
-            description: "Добавляет дополнительные данные в ответ. Поддерживает несколько значений через запятую.",
-            required: false
-        }
-    ],
-    responseParams: [
-        {
-            name: "id",
-            type: "int",
-            description: "ID статуса."
-        },
-        {
-            name: "name",
-            type: "string",
-            description: "Название статуса."
-        },
-        {
-            name: "sort",
-            type: "int",
-            description: "Сортировка статуса."
-        },
-        {
-            name: "is_editable",
-            type: "bool",
-            description: "Доступен ли статус для редактирования."
-        },
-        {
-            name: "pipeline_id",
-            type: "int",
-            description: "ID воронки, в которой находится статус."
-        },
-        {
-            name: "color",
-            type: "string",
-            description: "Цвет статуса."
-        },
-        {
-            name: "type",
-            type: "int",
-            description: "Тип статуса: 1 — неразобранное, 0 — обычный статус."
-        },
-        {
-            name: "account_id",
-            type: "int",
-            description: "ID аккаунта, в котором находится воронка."
-        },
-        {
-            name: "descriptions",
-            type: "array",
-            description: "Описания статуса. Возвращается при использовании GET-параметра with."
-        }
-    ],
+    "with"
+],
+
+responseParams: [
+    "id",
+    "name",
+    "sort",
+    "is_editable",
+    "pipeline_id",
+    "color",
+    "type",
+    "account_id",
+    "descriptions"
+],
     successCodes: [
         {
             code: 200,
@@ -3424,60 +3333,20 @@ pipelines:[
         "Метод доступен всем пользователям аккаунта."
     ],
     requestParams: [
-        {
-            name: "with",
-            type: "string",
-            description: "Добавляет дополнительные данные в ответ. Поддерживает несколько значений через запятую.",
-            required: false
-        }
-    ],
-    responseParams: [
-        {
-            name: "id",
-            type: "int",
-            description: "ID статуса."
-        },
-        {
-            name: "name",
-            type: "string",
-            description: "Название статуса."
-        },
-        {
-            name: "sort",
-            type: "int",
-            description: "Сортировка статуса."
-        },
-        {
-            name: "is_editable",
-            type: "bool",
-            description: "Доступен ли статус для редактирования."
-        },
-        {
-            name: "pipeline_id",
-            type: "int",
-            description: "ID воронки, в которой находится статус."
-        },
-        {
-            name: "color",
-            type: "string",
-            description: "Цвет статуса."
-        },
-        {
-            name: "type",
-            type: "int",
-            description: "Тип статуса: 1 — неразобранное, 0 — обычный статус."
-        },
-        {
-            name: "account_id",
-            type: "int",
-            description: "ID аккаунта, в котором находится воронка."
-        },
-        {
-            name: "descriptions",
-            type: "array",
-            description: "Описания статуса. Возвращаются при использовании GET-параметра with=descriptions."
-        }
-    ],
+    "with"
+],
+
+responseParams: [
+    "id",
+    "name",
+    "sort",
+    "is_editable",
+    "pipeline_id",
+    "color",
+    "type",
+    "account_id",
+    "descriptions"
+],
     successCodes: [
         {
             code: 200,
@@ -3506,83 +3375,25 @@ pipelines:[
         "Можно передавать эмоджи в описаниях.",
         "Доступные уровни описаний: newbie, candidate, master."
     ],
-    requestHeaders: {
-        "Content-Type": "application/json"
-    },
+    
     requestParams: [
-        {
-            name: "name",
-            type: "string",
-            description: "Название статуса. Обязательный параметр.",
-            required: true
-        },
-        {
-            name: "sort",
-            type: "int",
-            description: "Сортировка статуса. Обязательный параметр.",
-            required: true
-        },
-        {
-            name: "color",
-            type: "string",
-            description: "Цвет статуса.",
-            required: false
-        },
-        {
-            name: "request_id",
-            type: "string",
-            description: "Поле, которое вернется в ответе без изменений и не будет сохранено.",
-            required: false
-        },
-        {
-            name: "descriptions",
-            type: "array",
-            description: "Описания статуса.",
-            required: false
-        }
-    ],
-    responseParams: [
-        {
-            name: "id",
-            type: "int",
-            description: "ID созданного статуса."
-        },
-        {
-            name: "name",
-            type: "string",
-            description: "Название статуса."
-        },
-        {
-            name: "sort",
-            type: "int",
-            description: "Сортировка статуса."
-        },
-        {
-            name: "pipeline_id",
-            type: "int",
-            description: "ID воронки."
-        },
-        {
-            name: "color",
-            type: "string",
-            description: "Цвет статуса."
-        },
-        {
-            name: "type",
-            type: "int",
-            description: "Тип статуса."
-        },
-        {
-            name: "account_id",
-            type: "int",
-            description: "ID аккаунта."
-        },
-        {
-            name: "descriptions",
-            type: "array",
-            description: "Массив описаний статуса."
-        }
-    ],
+    "name",
+    "sort",
+    "color",
+    "request_id",
+    "descriptions"
+],
+
+responseParams: [
+    "id",
+    "name",
+    "sort",
+    "pipeline_id",
+    "color",
+    "type",
+    "account_id",
+    "descriptions"
+],
     successCodes: [
         {
             code: 200,
@@ -3623,82 +3434,25 @@ pipelines:[
         "Можно передавать эмоджи в описаниях.",
         "Доступные уровни описаний: newbie, candidate, master."
     ],
-    requestHeaders: {
-        "Content-Type": "application/json"
-    },
+   
     requestParams: [
-        {
-            name: "name",
-            type: "string",
-            description: "Название статуса.",
-            required: false
-        },
-        {
-            name: "sort",
-            type: "int",
-            description: "Сортировка статуса.",
-            required: false
-        },
-        {
-            name: "color",
-            type: "string",
-            description: "Цвет статуса.",
-            required: false
-        },
-        {
-            name: "descriptions",
-            type: "array",
-            description: "Описания статуса.",
-            required: false
-        }
-    ],
-    responseParams: [
-        {
-            name: "id",
-            type: "int",
-            description: "ID статуса."
-        },
-        {
-            name: "name",
-            type: "string",
-            description: "Название статуса."
-        },
-        {
-            name: "sort",
-            type: "int",
-            description: "Сортировка статуса."
-        },
-        {
-            name: "is_editable",
-            type: "bool",
-            description: "Доступен ли статус для редактирования."
-        },
-        {
-            name: "pipeline_id",
-            type: "int",
-            description: "ID воронки."
-        },
-        {
-            name: "color",
-            type: "string",
-            description: "Цвет статуса."
-        },
-        {
-            name: "type",
-            type: "int",
-            description: "Тип статуса."
-        },
-        {
-            name: "account_id",
-            type: "int",
-            description: "ID аккаунта."
-        },
-        {
-            name: "descriptions",
-            type: "array",
-            description: "Описания статуса."
-        }
-    ],
+    "name",
+    "sort",
+    "color",
+    "descriptions"
+],
+
+responseParams: [
+    "id",
+    "name",
+    "sort",
+    "is_editable",
+    "pipeline_id",
+    "color",
+    "type",
+    "account_id",
+    "descriptions"
+],
     successCodes: [
         {
             code: 200,
@@ -3731,11 +3485,6 @@ pipelines:[
         "Метод доступен только с правами администратора аккаунта.",
         "Сделки, которые находятся в удаляемом этапе, будут переведены в первый этап воронки."
     ],
-    requestHeaders: [
-        "Content-Type: application/json"
-    ],
-    requestParams: [],
-    responseParams: [],
     successCodes: [
         {
             code: 204,
